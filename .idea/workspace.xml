@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c92a058-6175-4522-98ec-11029ac9fb33" name="Changes" comment="B task don`t decide">
-      <change afterPath="$PROJECT_DIR$/.idea/algorithm_training.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="7c92a058-6175-4522-98ec-11029ac9fb33" name="Changes" comment="B task don`t decide_2" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,25 +20,25 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2k7gA7JizglatxBvIMrALFFdFkU" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.A_Словарь_синонимов.executor": "Run",
-    "Python.B_The_number_of_the_word_appearance.executor": "Run",
-    "Python.E_OpenCalculator.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/maksimkalinin/PycharmProjects/algorithm_training/1_0/Lesson_4",
-    "settings.editor.selected.configurable": "preferences.fileTypes"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.A_Словарь_синонимов.executor&quot;: &quot;Run&quot;,
+    &quot;Python.B_The_number_of_the_word_appearance.executor&quot;: &quot;Run&quot;,
+    &quot;Python.E_OpenCalculator.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/maksimkalinin/PycharmProjects/algorithm_training/1_0/Lesson_4&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/1_0/Lesson_4" />
@@ -194,7 +186,23 @@
       <option name="project" value="LOCAL" />
       <updated>1722724634503</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="B task don`t decide_2">
+      <option name="closed" value="true" />
+      <created>1722725398666</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1722725398666</updated>
+    </task>
+    <task id="LOCAL-00008" summary="B task don`t decide_2">
+      <option name="closed" value="true" />
+      <created>1722725434968</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1722725434968</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -215,6 +223,7 @@
     <MESSAGE value="A_Словарь_синонимов" />
     <MESSAGE value="A_Dictionary_of_synonyms redact" />
     <MESSAGE value="B task don`t decide" />
-    <option name="LAST_COMMIT_MESSAGE" value="B task don`t decide" />
+    <MESSAGE value="B task don`t decide_2" />
+    <option name="LAST_COMMIT_MESSAGE" value="B task don`t decide_2" />
   </component>
 </project>
