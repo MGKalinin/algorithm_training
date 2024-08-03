@@ -1,3 +1,5 @@
+# E. OpenCalculator
+
 # В новой программе OpenCalculator появилась новая возможность –
 # можно настроить, какие кнопки отображаются,
 # а какие – нет. Если кнопка не отображается на экране,
@@ -20,8 +22,21 @@
 
 
 with open('input.txt', 'r') as file:
-    first = file.readline().strip().split()
-    second = list(_ for _ in file.readline().strip())
-    print(first, second)
+    numbers = set(file.readline().strip().split())
+    digit = set(list(_ for _ in file.readline().strip()))
+    # print(numbers, digit)
+
+
+def answer(numbers, digit):
+    res = digit - numbers  # которых есть только в одном
+    # print(res)
+
+    if len(res) == 0:
+        return 0
+    else:
+        return len(res)
+
+
+print(answer(numbers, digit))
 
 
