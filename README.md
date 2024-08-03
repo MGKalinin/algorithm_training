@@ -6,7 +6,7 @@
         Lesson_3 - номер занятия   
             E_OpenCalculator - номер задачи
         Lesson_4   
-            A_Словарь_синонимов
+            A_Dictionary_of_synonyms
 
 
 
