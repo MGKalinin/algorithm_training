@@ -15,9 +15,17 @@ for i in range(N):
 # print(prefix_sum)
 
 count = 0
-for start in range(N):
-    for end in range(start, N):
-        curr_sum = prefix_sum[end + 1] - prefix_sum[start]
-        if curr_sum == K:
-            count += 1
+start = 0
+end = 0
+curr_sum = 0
+while end < N:
+    curr_sum = prefix_sum[end + 1] - prefix_sum[start]
+    if curr_sum == K:
+        count += 1
+        start += 1
+        end += 1
+    elif curr_sum < K:
+        end += 1
+    else:
+        start += 1
 print(count)
