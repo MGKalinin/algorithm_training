@@ -16,3 +16,32 @@
 # Выведите пару неотрицательных чисел — цвет майки и цвет штанов, которые следует выбрать Глебу.
 # Если вариантов выбора несколько, выведите любой из них.
 
+with open('input.txt', 'r') as file:
+    t_shirt=int(file.readline().strip())
+    t_shirt_list=list(map(int,file.readline().strip().split()))
+    # print(t_shirt,t_shirt_list)
+    pants=int(file.readline().strip())
+    pants_list=list(map(int,file.readline().strip().split()))
+    # print(pants,pants_list)
+
+ans=[]
+min_diff=float('inf')
+t=0
+p=0
+
+while t< t_shirt and p< pants:
+    if abs(t_shirt_list[t]-pants_list[p])<min_diff:
+        ans.append((t_shirt_list[t],pants_list[p]))
+        min_diff=abs(t_shirt_list[t]-pants_list[p])
+        # print(ans)
+    if t_shirt_list[t]<pants_list[p]:
+        t+=1
+    else:
+        p+=1
+
+print(' '.join(list(map(str,ans[-1]))))
+
+
+
+
+
