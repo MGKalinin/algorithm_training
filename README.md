@@ -14,7 +14,7 @@
         Lesson_5: Prefix sums and two pointers   
             A_Stylish_clothes   
             B_Sum_of_numbers   
-            C_Tourism
+            C_Tourism : not right
             
 
 
