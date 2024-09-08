@@ -16,7 +16,7 @@
             B_Sum_of_numbers   
             C_Tourism : not right   
         Lesson_6: Binary Search   
-            A_Binary_search
+            A_Binary_search   
 
            
             
