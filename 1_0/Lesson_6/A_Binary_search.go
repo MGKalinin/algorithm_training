@@ -2,60 +2,39 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-	"sort"
-	"strconv"
-	"strings"
+	"log"
 )
 
+// Функция считывает данные
 func main() {
-	file, err := os.Open("input.txt")
-	if err != nil {
-		fmt.Println(err)
+	// Считываем первую строку
+	var nk = make([]int, 2)
+	for i := 0; i < len(nk); i++ {
+		_, err := fmt.Scan(&nk[i])
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	scanner.Scan()
-	line := scanner.Text()
-	parts := strings.Fields(line)
-	N, err := strconv.Atoi(parts[0])
-	if err != nil {
-		fmt.Println(err)
+	fmt.Println(nk)
+	N := nk[0] // Длина первого массива
+	K := nk[1] // Длина второго массива
+	// Считываем первый массив
+	var arr1 = make([]int, N)
+	for i := 0; i < len(arr1); i++ {
+		_, err := fmt.Scan(&arr1[i])
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
-	K, err := strconv.Atoi(parts[1])
-	if err != nil {
-		fmt.Println(err)
+	fmt.Println(arr1)
+	// Считываем второй массив
+	var arr2 = make([]int, K)
+	for i := 0; i < len(arr2); i++ {
+		_, err := fmt.Scan(&arr2[i])
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
-	fmt.Println(N, K)
-
-	// список из N
-	scanner.Scan()
-	line = scanner.Text()
-	parts = strings.Fields(line)
-	arr_1 := make([]int, N)
-	for i, part := range parts {
-		arr_1[i], err = strconv.Atoi(part)
-		// if err != nil {
-		// 	fmt.Println(err)
-		// }
-	}
-	sort.Ints(arr_1)
-	fmt.Println(arr_1)
-	// список из K
-	scanner.Scan()
-	line = scanner.Text()
-	parts = strings.Fields(line)
-	arr_2 := make([]int, K)
-	for i, part := range parts {
-		arr_2[i], err = strconv.Atoi(part)
-		// if err != nil {
-		// 	fmt.Println(err)
-		// }
-	}
-	sort.Ints(arr_2)
-	fmt.Println(arr_2)
-
+	fmt.Println(N, K, arr1, arr2)
 }
