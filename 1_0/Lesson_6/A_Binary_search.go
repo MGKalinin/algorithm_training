@@ -1,40 +1,60 @@
-// A. Двоичный поиск
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"log"
+	"os"
 )
 
-// Функция считывает данные
 func main() {
-	// Считываем первую строку
-	var nk = make([]int, 2)
-	for i := 0; i < len(nk); i++ {
-		_, err := fmt.Scan(&nk[i])
-		if err != nil {
-			log.Fatal(err)
+	// 99. Двоичный поиск
+	// * число --
+	var N, K int // N элементов первого массива, K элементов второго массива
+	_, err := fmt.Scan(&N, &K)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// первый массив
+	reader := bufio.NewReader(os.Stdin)
+	// var n int
+	// fmt.Fscan(reader, &N)
+	first := make([]int, N)
+	for i := 0; i < N; i++ {
+		fmt.Fscan(reader, &first[i])
+	}
+	// второй массив
+	second := make([]int, K)
+	for i := 0; i < K; i++ {
+		fmt.Fscan(reader, &second[i])
+	}
+	// fmt.Println(first, second)
+	// если K встречается в N- "YES"
+	// бинарный поиск
+	for i := range second {
+		if binSearch(first[:], second[i]) { // преобразовать массив в срез?
+			fmt.Println("YES")
+		} else {
+			fmt.Println("NO")
 		}
 	}
-	fmt.Println(nk)
-	N := nk[0] // Длина первого массива
-	K := nk[1] // Длина второго массива
-	// Считываем первый массив
-	var arr1 = make([]int, N)
-	for i := 0; i < len(arr1); i++ {
-		_, err := fmt.Scan(&arr1[i])
-		if err != nil {
-			log.Fatal(err)
+
+}
+
+func binSearch(arr []int, target int) bool {
+	start := 0
+	finish := len(arr) - 1
+	for start <= finish {
+		mid := (start + finish) / 2
+		if arr[mid] == target {
+			return true
+		}
+		if arr[mid] < target {
+			start = mid + 1
+		} else {
+			finish = mid - 1
 		}
 	}
-	fmt.Println(arr1)
-	// Считываем второй массив
-	var arr2 = make([]int, K)
-	for i := 0; i < len(arr2); i++ {
-		_, err := fmt.Scan(&arr2[i])
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
-	fmt.Println(N, K, arr1, arr2)
+	return false
 }
