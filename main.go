@@ -5,43 +5,41 @@ import "fmt"
 // 238. Product of Array Except Self
 func main() {
 	nums := []int{1, 2, 3, 4}
-	fmt.Println(productExceptSelf(nums))
-	fmt.Println(productPrefix(nums))
-	fmt.Println(productSuffix(nums))
-}
-
-func productExceptSelf(nums []int) []int {
 	n := len(nums)
-	prefix_sum := make([]int, n+1)
-	prefix_sum[0] = 0
-	for i := 1; i <= n; i++ {
-		prefix_sum[i] = prefix_sum[i-1] + nums[i-1]
-
+	result := make([]int, n)
+	prefix := prefixProduct(nums)
+	suffix := suffixProduct(nums)
+	for i := 0; i < n; i++ {
+		if i == 0 {
+			result[i] = suffix[i+1]
+		} else if i == n-1 {
+			result[n-1] = prefix[i-1]
+		} else {
+			result[i] = prefix[i-1] * suffix[i+1]
+		}
 	}
-	fmt.Println(prefix_sum)
-	return prefix_sum
+	fmt.Println(result)
 }
 
 // функция вычисляет перфиксное произведение
-func productPrefix(nums []int) []int {
+func prefixProduct(nums []int) []int {
 	n := len(nums)
-	prefix_prod := make([]int, n+1)
-	prefix_prod[0] = 1
-	for i := 1; i <= n; i++ {
-		prefix_prod[i] = prefix_prod[i-1] * nums[i-1]
+	prefixProd := make([]int, n)
+	prefixProd[0] = nums[0]
+	for i := 1; i < n; i++ {
+		prefixProd[i] = prefixProd[i-1] * nums[i]
 	}
-	fmt.Println(prefix_prod)
-	return prefix_prod
+	// fmt.Println(prefix_prod)
+	return prefixProd
 }
 
 // функция вычисляет суффиксное произведение
-func productSuffix(nums []int) []int {
+func suffixProduct(nums []int) []int {
 	n := len(nums)
-	prefix_prod := make([]int, n+1)
-	prefix_prod[0] = 1
-	for i := 0; i <= n-1; i++ {
-		prefix_prod[i] = prefix_prod[i+1] * nums[i+1]
+	suffixProd := make([]int, n)
+	suffixProd[n-1] = nums[n-1]
+	for i := (n - 2); i >= 0; i-- {
+		suffixProd[i] = nums[i] * suffixProd[i+1]
 	}
-	fmt.Println(prefix_prod)
-	return prefix_prod
+	return suffixProd
 }
