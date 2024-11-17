@@ -1,6 +1,6 @@
 package main
 
-// 26. Remove Duplicates from Sorted Array
+// 125. Valid Palindrome
 func main() {
 
 }
