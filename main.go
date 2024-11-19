@@ -40,10 +40,34 @@ func main() {
 		}
 		numberTrails = append(numberTrails, []int{s, f})
 	}
-	fmt.Println(N)
-	fmt.Println(mountainRange)
-	fmt.Println(M)
-	fmt.Println(numberTrails)
-}
+	// }
+	// fmt.Println(N)
+	// fmt.Println(mountainRange)
+	// fmt.Println(M)
+	// fmt.Println(numberTrails)
+	// создать переменную для подсчёта префиксной суммы
+	// определить что больше точка трассы старта или финиша- если старт больше идём циклом по слайсу горной цепи и
+	// складываем разночти координат у, если у последующий > у предыдущего
+	// иначе проход по слайсу горной цепи в обратном порядке
 
-// написать тесты?
+	for _, point := range numberTrails {
+		start, finish := point[0]-1, point[1]-1
+		resultSum := 0
+
+		if start < finish {
+			for i := start; i < finish; i++ {
+				if mountainRange[i+1][1] > mountainRange[i][1] {
+					resultSum += (mountainRange[i+1][1] - mountainRange[i][1])
+				}
+			}
+		} else {
+			for i := start; i > finish; i-- {
+				if mountainRange[i][1] < mountainRange[i-1][1] {
+					resultSum += (mountainRange[i-1][1] - mountainRange[i][1])
+				}
+			}
+		}
+		fmt.Println(resultSum)
+	}
+
+}
