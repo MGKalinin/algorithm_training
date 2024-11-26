@@ -81,7 +81,6 @@ exit
 */
 func (s *Stack) Exit() {
 	fmt.Println("bye")
-	return
 }
 
 // 140. Стек с защитой от ошибок
