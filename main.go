@@ -1,6 +1,6 @@
 package main
 
-// 142. Постфиксная запись
+// 20. Valid Parentheses
 func main() {
 
 }
