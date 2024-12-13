@@ -1,32 +1,26 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
 
-// LeetCode 75
-// Стеки / Stack
-
-// 2390. Removing Stars From a String
 func main() {
-	arr := "leet**cod*e"
-	removeStars(arr)
-}
+	reader := bufio.NewReader(os.Stdin)
+	var lines []string
 
-type Stack struct {
-	elements []string
-}
-
-func (s *Stack) Push(elements []string, elem string) {
-	elements = append(elements, elem)
-}
-
-func removeStars(s string) string {
-	stack := Stack{}
-	for _, char := range s {
-		stack.Push(stack.elements, char)
+	// Читаем строки до конца ввода или до определенного количества строк
+	for {
+		line, err := reader.ReadString('\n')
+		if err != nil {
+			break
+		}
+		lines = append(lines, line)
 	}
-	fmt.Println(stack)
-	if len(stack.elements) != 0 {
-		return true
+
+	// Выводим прочитанные строки
+	for _, line := range lines {
+		fmt.Print(line)
 	}
-	return false
 }
