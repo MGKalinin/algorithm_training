@@ -30,7 +30,7 @@ func findResult(n int) int {
 	fmt.Println(prNum)
 	prDelitel := []int{}
 	for _, num := range prNum {
-		for n % num {
+		for n % int(num) {
 			prDelitel = append(prDelitel, num)
 
 		}
