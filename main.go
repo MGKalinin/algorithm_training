@@ -6,19 +6,28 @@ import (
 )
 
 // B. Кольцевая линия метро https://contest.yandex.ru/contest/28730/problems/B/
-
+// 10 1 9
 func main() {
 	// * число --
-	var N, i, j int64
+	var N, i, j int
 	_, err := fmt.Scan(&N, &i, &j)
 	if err != nil {
 		log.Fatal(err)
 	}
-	first := j - i
-	one := (N - i)
-	second := (N - j)
+	fmt.Println(N)
+	fmt.Println(i)
+	fmt.Println(j)
+	first := []int{} // общий список чисел
+	// second := []int{} //списко от начала до i
+	// three := []int{}  //список от j до конца
+	for k := 1; k <= N; k++ {
+		first = append(first, k)
+	}
 	fmt.Println(first)
-	fmt.Println(one)
-	fmt.Println(second)
+	onePart := first[:i]
+
+	fmt.Println(onePart)
+	twoPart := first[j+1:]
+	fmt.Println(twoPart)
 
 }
