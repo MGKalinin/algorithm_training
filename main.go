@@ -22,12 +22,10 @@ func main() {
 		totalStations = append(totalStations, i)
 	}
 	between := totalStations[i:j]
-	part1 := totalStations[:i]
-	part2 := totalStations[j:]
+	parts := append(totalStations[:i], totalStations[j:]...)
 
 	fmt.Println(totalStations)
 	fmt.Println(between)
-	fmt.Println(part1)
-	fmt.Println(part2)
+	fmt.Println(parts)
 
 }
