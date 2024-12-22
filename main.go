@@ -17,21 +17,25 @@ func main() {
 	// fmt.Println(N)
 	// fmt.Println(i)
 	// fmt.Println(j)
-	totalStations := []int{} //всего станций
-	for i := 1; i <= N; i++ {
-		totalStations = append(totalStations, i)
+	a := 0
+	for k := i + 1; k < j; k++ {
+		// fmt.Println(a)
+		a++ //между станциями
 	}
-	// fmt.Println(totalStations)
-	between := totalStations[i : j-1]
-	a := len(between)
-	// fmt.Println(between)
-	parts := append(totalStations[:i-1], totalStations[j:]...)
+	// fmt.Println(a)
+	b := 0
+	for k := 1; k < i; k++ {
+		b++ //до i
+	}
+	// fmt.Println(b)
 
-	// fmt.Println(parts)
-	b := len(parts)
-	if a > b {
-		fmt.Println(b)
-	} else {
+	for k := j; k < N; k++ {
+		b++ //от j до конца
+	}
+	// fmt.Println(b)
+	if a < b {
 		fmt.Println(a)
+	} else {
+		fmt.Println(b)
 	}
 }
