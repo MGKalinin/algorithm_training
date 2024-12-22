@@ -17,17 +17,19 @@ func main() {
 	fmt.Println(N)
 	fmt.Println(i)
 	fmt.Println(j)
-	first := []int{} // общий список чисел
-	// second := []int{} //списко от начала до i
-	// three := []int{}  //список от j до конца
-	for k := 1; k <= N; k++ {
-		first = append(first, k)
+	totalStations := []int{} //всего станций
+	for i := 0; i <= N; i++ {
+		totalStations = append(totalStations, i)
 	}
-	fmt.Println(first)
-	onePart := first[:i]
+	betweenStations := totalStations[i:j]
+	betweenStationsCircle1 := totalStations[:i]
+	betweenStationsCircle2 := totalStations[j:]
 
-	fmt.Println(onePart)
-	twoPart := first[j+1:]
-	fmt.Println(twoPart)
+	for _, num := range betweenStationsCircle1 {
+		betweenStationsCircle2 = append(betweenStationsCircle2, num)
+	}
+	fmt.Println(totalStations)
+	fmt.Println(betweenStations)
+	fmt.Println(betweenStationsCircle1)
 
 }
