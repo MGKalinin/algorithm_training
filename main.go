@@ -14,18 +14,24 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(N)
-	fmt.Println(i)
-	fmt.Println(j)
+	// fmt.Println(N)
+	// fmt.Println(i)
+	// fmt.Println(j)
 	totalStations := []int{} //всего станций
 	for i := 1; i <= N; i++ {
 		totalStations = append(totalStations, i)
 	}
-	between := totalStations[i:j]
-	parts := append(totalStations[:i], totalStations[j:]...)
+	// fmt.Println(totalStations)
+	between := totalStations[i : j-1]
+	a := len(between)
+	// fmt.Println(between)
+	parts := append(totalStations[:i-1], totalStations[j:]...)
 
-	fmt.Println(totalStations)
-	fmt.Println(between)
-	fmt.Println(parts)
-
+	// fmt.Println(parts)
+	b := len(parts)
+	if a > b {
+		fmt.Println(b)
+	} else {
+		fmt.Println(a)
+	}
 }
