@@ -19,7 +19,7 @@ func main() {
 	// fmt.Println(j)
 	a := 0
 	for k := i + 1; k < j; k++ {
-		// fmt.Println(a)
+
 		a++ //между станциями
 	}
 	// fmt.Println(a)
