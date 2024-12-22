@@ -7,6 +7,7 @@ import (
 
 // B. Кольцевая линия метро https://contest.yandex.ru/contest/28730/problems/B/
 // 10 1 9
+// 20 10 8 (тест №8)
 func main() {
 	// * число --
 	var N, i, j int
@@ -17,6 +18,12 @@ func main() {
 	// fmt.Println(N)
 	// fmt.Println(i)
 	// fmt.Println(j)
+	if i < j {
+		i, j = i, j
+	} else {
+		i, j = j, i
+	}
+
 	a := 0
 	for k := i + 1; k < j; k++ {
 
