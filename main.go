@@ -30,7 +30,9 @@ func main() {
 	year, _ := strconv.Atoi(parts[2])
 	// форматирование даты в нужный формат
 	formattedDateDMY := fmt.Sprintf("%02d-%02d-%04d", day, month, year)
+	fmt.Println(formattedDateDMY)
 	formattedDateMDY := fmt.Sprintf("%02d-%02d-%04d", month, day, year)
+	fmt.Println(formattedDateMDY)
 
 	// Layout-ы для парсинга
 	layoutMDY := "01-02-2006" // Месяц-День-Год
@@ -43,8 +45,11 @@ func main() {
 
 	if errMDY == nil && errDMY == nil {
 		fmt.Println(0)
-	} else if errMDY == nil || errDMY == nil {
+	}
+	if errMDY == nil || errDMY == nil {
 		// Только один формат корректен, дата однозначна
 		fmt.Println(1)
 	}
 }
+
+// написать функцию проверки дней вручную- time.Parse хуйня
