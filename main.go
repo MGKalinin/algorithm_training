@@ -41,9 +41,10 @@ func main() {
 	// Проверка даты в формате День-Месяц-Год
 	_, errDMY := time.Parse(layoutDMY, formattedDateDMY)
 
-	if errMDY == nil || errDMY == nil {
+	if errMDY == nil && errDMY == nil {
 		fmt.Println(0)
-	} else {
+	} else if errMDY == nil || errDMY == nil {
+		// Только один формат корректен, дата однозначна
 		fmt.Println(1)
 	}
 }
