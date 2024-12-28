@@ -2,12 +2,10 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"log"
 	"os"
 	"strconv"
 	"strings"
-	"time"
 )
 
 // C. Даты https://contest.yandex.ru/contest/28730/problems/C/
@@ -28,28 +26,5 @@ func main() {
 	day, _ := strconv.Atoi(parts[0])
 	month, _ := strconv.Atoi(parts[1])
 	year, _ := strconv.Atoi(parts[2])
-	// форматирование даты в нужный формат
-	formattedDateDMY := fmt.Sprintf("%02d-%02d-%04d", day, month, year)
-	fmt.Println(formattedDateDMY)
-	formattedDateMDY := fmt.Sprintf("%02d-%02d-%04d", month, day, year)
-	fmt.Println(formattedDateMDY)
 
-	// Layout-ы для парсинга
-	layoutMDY := "01-02-2006" // Месяц-День-Год
-	layoutDMY := "02-01-2006" // День-Месяц-Год
-
-	// Проверка даты в формате Месяц-День-Год
-	_, errMDY := time.Parse(layoutMDY, formattedDateMDY)
-	// Проверка даты в формате День-Месяц-Год
-	_, errDMY := time.Parse(layoutDMY, formattedDateDMY)
-
-	if errMDY == nil && errDMY == nil {
-		fmt.Println(0)
-	}
-	if errMDY == nil || errDMY == nil {
-		// Только один формат корректен, дата однозначна
-		fmt.Println(1)
-	}
 }
-
-// написать функцию проверки дней вручную- time.Parse хуйня
