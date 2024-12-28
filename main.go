@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-// D. Строительство школы https://contest.yandex.ru/contest/28730/problems/D/
+// E. Точка и треугольник https://contest.yandex.ru/contest/28730/problems/E/
 
 func main() {
 	// * число --
