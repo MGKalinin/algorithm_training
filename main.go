@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -25,6 +26,11 @@ func main() {
 	parts := strings.Split(ans, " ")
 	day, _ := strconv.Atoi(parts[0])
 	month, _ := strconv.Atoi(parts[1])
-	year, _ := strconv.Atoi(parts[2])
+	// year, _ := strconv.Atoi(parts[2])
+	if day <= 12 && month <= 12 && day != month {
+		fmt.Println(0)
+	} else {
+		fmt.Println(1)
+	}
 
 }
