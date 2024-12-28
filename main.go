@@ -1,36 +1,27 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"log"
-	"os"
-	"strconv"
-	"strings"
 )
 
-// C. Даты https://contest.yandex.ru/contest/28730/problems/C/
-
-// 1 2 2003
-// 3 3 2067 // тест 3 fail
+// D. Строительство школы https://contest.yandex.ru/contest/28730/problems/D/
 
 func main() {
-	// Чтение строки из стандартного ввода
-	scanner := bufio.NewScanner(os.Stdin)
-	scanner.Scan()
-	ans := scanner.Text()
-	err := scanner.Err()
+	// * число --
+	var number int
+	_, err := fmt.Scan(&number)
 	if err != nil {
 		log.Fatal(err)
 	}
-	parts := strings.Split(ans, " ")
-	day, _ := strconv.Atoi(parts[0])
-	month, _ := strconv.Atoi(parts[1])
-	// year, _ := strconv.Atoi(parts[2])
-	if day <= 12 && month <= 12 && day != month {
-		fmt.Println(0)
-	} else {
-		fmt.Println(1)
+	// * массив чисел известной длины --
+	var arr = make([]int, number)
+	for i := 0; i < len(arr); i++ {
+		_, err := fmt.Scan(&arr[i])
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
-
+	mid := len(arr) / 2
+	fmt.Println(arr[mid])
 }
