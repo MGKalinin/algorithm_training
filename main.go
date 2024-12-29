@@ -1,6 +1,6 @@
 package main
 
-// B. Дома и магазины https://contest.yandex.ru/contest/28738/problems/B/
+// A. Префиксные суммы https://contest.yandex.ru/contest/29075/problems/A/
 
 func main() {
 
