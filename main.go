@@ -1,27 +1,34 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"log"
+	"os"
+	"strconv"
 )
 
-// E. Точка и треугольник https://contest.yandex.ru/contest/28730/problems/E/
+// A. Количество равных максимальному https://contest.yandex.ru/contest/28738/problems/A/
 
 func main() {
-	// * число --
-	var number int
-	_, err := fmt.Scan(&number)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// * массив чисел известной длины --
-	var arr = make([]int, number)
-	for i := 0; i < len(arr); i++ {
-		_, err := fmt.Scan(&arr[i])
+	arr := []int{}
+	// * строку --
+	scanner := bufio.NewScanner(os.Stdin)
+	for scanner.Scan() {
+		line := scanner.Text()
+		num, err := strconv.Atoi(line)
 		if err != nil {
-			log.Fatal(err)
+			log.Printf("Ошибка преобразования '%s' в число: %v, пропускаем.", line, err)
+			continue
 		}
+		if num == 0 {
+			break
+		}
+		arr = append(arr, num)
 	}
-	mid := len(arr) / 2
-	fmt.Println(arr[mid])
+	if err := scanner.Err(); err != nil {
+		log.Fatalf("Ошибка чтения из stdin: %v", err)
+	}
+	fmt.Println(arr)
+	// посчитать к-во чисел равных максимальному
 }
