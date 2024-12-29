@@ -29,6 +29,17 @@ func main() {
 	if err := scanner.Err(); err != nil {
 		log.Fatalf("Ошибка чтения из stdin: %v", err)
 	}
-	fmt.Println(arr)
+	// fmt.Println(arr)
 	// посчитать к-во чисел равных максимальному
+	count := 1
+	maxEl := arr[0]
+	for i := 1; i < len(arr); i++ {
+		if arr[i] > maxEl {
+			maxEl = arr[i]
+			count = 1
+		} else if arr[i] == maxEl {
+			count++
+		}
+	}
+	fmt.Println(count)
 }
