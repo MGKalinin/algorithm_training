@@ -4,3 +4,9 @@
 ###
 запуск тестов 
 go test -v
+
+reader := bufio.NewReader(os.Stdin) // не ебёт мозги со сдвигом чтения
+	// считать размер массива
+	line, _ := reader.ReadString('\n')
+	parts := strings.Fields(line) //получается слайс строк без пробелов и символов новой строки
+	n, _ := strconv.Atoi(parts[0])

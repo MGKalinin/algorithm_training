@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 	"strconv"
 	"strings"
@@ -12,28 +11,24 @@ import (
 
 func main() {
 	reader := bufio.NewReader(os.Stdin)
-	// считать размер и количество запросов
+	// считать размер массива
 	line, _ := reader.ReadString('\n')
 	parts := strings.Fields(line) //получается слайс строк без пробелов и символов новой строки
 	n, _ := strconv.Atoi(parts[0])
 	// чтение массива
 	line, _ = reader.ReadString('\n')
 	parts = strings.Fields(line)
-	// подсчёт префиксной суммы
-	maxResult, _ := strconv.Atoi(parts[0])
-	prefixSum := make([]int, n+1)
-
-	for i := 1; i <= n; i++ {
-		num, _ := strconv.Atoi(parts[i-1])
-		prefixSum[i] = prefixSum[i-1] + num
-		if prefixSum[i] > maxResult {
-			maxResult = prefixSum[i]
-
-		} else {
-			continue
-		}
+	arr := make([]int, n)
+	for i := 0; i < n; i++ {
+		arr[i], _ = strconv.Atoi(parts[i])
 	}
-	fmt.Println(maxResult)
+	// подсчёт префиксных сумм всего массива
+	prefixSumm := make([]int, n+1)
+	for i := 1; i <= n; i++ {
+		prefixSumm[i] = prefixSumm[i-1] + arr[i-1]
+	}
+	// сравнить разницу минимальной префиксной суммы и максимальной префиксной суммы
+maxSum:=
 }
 
 // 5
