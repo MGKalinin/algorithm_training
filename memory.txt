@@ -2,3 +2,5 @@
 набрать в поиске >go install....
 выбрать Go: Install/Update Tools
 ###
+запуск тестов 
+go test -v
