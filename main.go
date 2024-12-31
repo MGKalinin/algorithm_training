@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"strconv"
 	"strings"
@@ -28,8 +29,37 @@ func main() {
 		prefixSumm[i] = prefixSumm[i-1] + arr[i-1]
 	}
 	// сравнить разницу минимальной префиксной суммы и максимальной префиксной суммы
-maxSum:=
+	maxPrefixSum := arr[0] //максимальная префиксная сумма
+	minPrefixSum := 0      //минимальнаЯ префиксная сумма
+	for i := 1; i <= n; i++ {
+		maxPrefixSum = calcMax(maxPrefixSum, prefixSumm[i]-minPrefixSum) // максимум среди
+		// текущего максимума и разностью минимальной префиксной суммы и
+		// текущего значения в префиксных суммах
+		minPrefixSum = calcMin(minPrefixSum, prefixSumm[i]) //мимнмальная префиксная сумма это
+		// минимум между текущей минимальной префиксной суммой и
+		// текущим значением в списке префиксных сумм
+
+	}
+	fmt.Println(maxPrefixSum)
 }
 
 // 5
 // 450402558 -840167367 -231820501 586187125 -627664644
+
+// функция выбора максимального значения
+func calcMax(a int, b int) int {
+	if a > b {
+		return a
+	} else {
+		return b
+	}
+}
+
+// функция выбора минимального значения
+func calcMin(a int, b int) int {
+	if a < b {
+		return a
+	} else {
+		return b
+	}
+}
