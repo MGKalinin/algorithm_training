@@ -17,7 +17,7 @@ func main() {
 	// flowerbed := []int{1, 0, 0, 0, 1}
 	// n := 2
 	// Output: false
-	flowerbed := []int{1, 0, 0, 0, 0, 1}
+	flowerbed := []int{1, 0, 0, 0, 0, 0, 1}
 	n := 2
 	// false
 	fmt.Println(canPlaceFlowers(flowerbed, n))
@@ -27,6 +27,7 @@ func canPlaceFlowers(flowerbed []int, n int) bool {
 	for i := 1; i < len(flowerbed)-1; i++ {
 		if flowerbed[i-1] == 0 && flowerbed[i+1] == 0 {
 			n -= 1
+			i += 2
 		} else {
 			continue
 		}
