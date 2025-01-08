@@ -19,7 +19,7 @@ func main() {
 	// Output: false
 	flowerbed := []int{1, 0, 0, 0, 0, 0, 1}
 	n := 2
-	// false
+	// true
 	fmt.Println(canPlaceFlowers(flowerbed, n))
 }
 
