@@ -2,8 +2,8 @@ package main
 
 import "fmt"
 
-// 605. Can Place Flowers
-// https://leetcode.com/problems/can-place-flowers/description/?envType=study-plan-v2&envId=leetcode-75
+// 345. Reverse Vowels of a String
+// https://leetcode.com/problems/reverse-vowels-of-a-string/description/?envType=study-plan-v2&envId=leetcode-75
 
 func main() {
 	// reader := bufio.NewReader(os.Stdin)
@@ -11,30 +11,12 @@ func main() {
 	// line, _ := reader.ReadString('\n')
 	// line = strings.TrimSpace(line) // Убираем символ новой строки и пробелы
 
-	// flowerbed := []int{1, 0, 0, 0, 1}
-	// n := 1
-	// Output: true
-	// flowerbed := []int{1, 0, 0, 0, 1}
-	// n := 2
-	// Output: false
-	flowerbed := []int{1, 0, 0, 0, 0, 0, 1}
-	n := 2
-	// true
-	fmt.Println(canPlaceFlowers(flowerbed, n))
+	s := "IceCreAm"
+	// Output: "AceCreIm"
+
+	fmt.Println(reverseVowels(s))
 }
 
-func canPlaceFlowers(flowerbed []int, n int) bool {
-	for i := 1; i < len(flowerbed)-1; i++ {
-		if flowerbed[i-1] == 0 && flowerbed[i+1] == 0 {
-			n -= 1
-			i += 2
-		} else {
-			continue
-		}
-	}
-	if n == 0 {
-		return true
-	} else {
-		return false
-	}
+func reverseVowels(s string) string {
+
 }
