@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
+	"runtime"
 )
 
-// 238. Product of Array Except Self
-// https://leetcode.com/problems/product-of-array-except-self/description/?envType=study-plan-v2&envId=leetcode-75
+// 392. Is Subsequence
+// https://leetcode.com/problems/is-subsequence/description/?envType=problem-list-v2&envId=29p0sxl6
 
 func main() {
 	// reader := bufio.NewReader(os.Stdin)
@@ -15,12 +16,16 @@ func main() {
 
 	// решить через многопоточность
 
-	nums := []int{1, 2, 3, 4}
-	// Output: [24,12,8,6]
+	s := "abc"
+	t := "ahbgdc"
+	// Output: true
+	// поделить искомую подпоследовательность на два-запустить две горутины
 
-	fmt.Println(productExceptSelf(nums))
+	fmt.Println(isSubsequence(s, t))
+	// Получаем количество горутин
+	fmt.Println("Number of goroutines:", runtime.NumGoroutine())
 }
 
-func productExceptSelf(nums []int) []int {
+func isSubsequence(s string, t string) bool {
 
 }
