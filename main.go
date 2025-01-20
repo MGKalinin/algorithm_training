@@ -31,34 +31,36 @@ func isSubsequence(s string, t string) bool {
 	mid := len(t) / 2
 	// fmt.Println(t[:mid])
 	// fmt.Println(t[mid:])
-	res := make([]rune, len(t[:mid]))
+	res := make([]string, len(t[:mid]))
 	type indexStore struct {
 		ind int
-		val rune
+		val string
 	}
 	ch1 := make(chan indexStore, len(t[:mid])) //для 1-й половины
 	// ch2 := make(chan rune, len(t[mid:])) //для 2-й половины
 
 	var wg sync.WaitGroup
 
-	for _, i := range t[:mid] { //идём по первой половине
+	for _, char := range t[:mid] { //идём по первой половине
 		wg.Add(1)
-		go func(i rune) {
-			for _, j := range s { //искомое
-				if j == i {
-					ch1 <- j
+		go func(char rune) {
+			defer wg.Done()
+			for k, j := range s { //искомое
+				if j == char {
+					ch1 <- indexStore{ind: k, val: string(j)}
 				}
 
 			}
-		}(i)
+		}(char)
 	}
 	wg.Wait()
 	go func() {
 		close(ch1)
 	}()
 
-	for i, k := range ch1 {
-		res[i] = k
+	for item := range ch1 {
+		res[item.ind] = item.val
 	}
+	fmt.Println(res)
 	return true
 }
