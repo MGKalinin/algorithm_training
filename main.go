@@ -83,3 +83,15 @@ func isSubsequence(s string, t string) bool {
 
 // "mdadm": "4.1-11"
 //   "parted": "3.4-1"
+// POST partnumbers-2025-01-21/_doc
+// {
+//     "@timestamp": "2025-01-21T12:00:03",
+//     "AQPartNumber": "70079872",
+//     "device_id": "test624",
+//     "components": [
+//       {
+//         "AQPartNumber": "10088693",
+//         "device_id": "ANS685V4000124"
+//       }
+//     ]
+// }
