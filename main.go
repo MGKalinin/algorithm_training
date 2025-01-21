@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"runtime"
 	"sync"
+	"time"
 )
 
 // 392. Is Subsequence
@@ -28,39 +29,57 @@ func main() {
 }
 
 func isSubsequence(s string, t string) bool {
+	start := time.Now()
+
 	mid := len(t) / 2
 	// fmt.Println(t[:mid])
 	// fmt.Println(t[mid:])
-	res := make([]string, len(t[:mid]))
+	res := make([]string, len(s))
 	type indexStore struct {
 		ind int
 		val string
 	}
 	ch1 := make(chan indexStore, len(t[:mid])) //для 1-й половины
-	// ch2 := make(chan rune, len(t[mid:])) //для 2-й половины
+	ch2 := make(chan indexStore, len(t[mid:])) //для 2-й половины
 
 	var wg sync.WaitGroup
-
-	for _, char := range t[:mid] { //идём по первой половине
-		wg.Add(1)
-		go func(char rune) {
-			defer wg.Done()
-			for k, j := range s { //искомое
+	wg.Add(2)
+	// Горутина для первой половины
+	go func() {
+		defer wg.Done()
+		for _, char := range t[:mid] {
+			for k, j := range s {
 				if j == char {
 					ch1 <- indexStore{ind: k, val: string(j)}
 				}
-
 			}
-		}(char)
-	}
-	wg.Wait()
-	go func() {
+		}
 		close(ch1)
 	}()
+
+	// Горутина для второй половины
+	go func() {
+		defer wg.Done()
+		for _, char := range t[mid:] {
+			for k, j := range s {
+				if j == char {
+					ch2 <- indexStore{ind: k, val: string(j)}
+				}
+			}
+		}
+		close(ch2)
+	}()
+	wg.Wait()
 
 	for item := range ch1 {
 		res[item.ind] = item.val
 	}
-	fmt.Println(res)
+	for item := range ch2 {
+		res[item.ind] = item.val
+		fmt.Println(res)
+	}
 	return true
 }
+
+// "mdadm": "4.1-11"
+//   "parted": "3.4-1"
