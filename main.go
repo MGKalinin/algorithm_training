@@ -2,9 +2,7 @@ package main
 
 import (
 	"fmt"
-	"runtime"
 	"sync"
-	"time"
 )
 
 // 392. Is Subsequence
@@ -18,18 +16,18 @@ func main() {
 
 	// решить через многопоточность
 
-	s := "abc"    //искомое
+	s := "acb"    //искомое
 	t := "ahbgdc" //где ищем
 	// Output: true
 	// поделить искомую подпоследовательность на два-запустить две горутины
 
 	fmt.Println(isSubsequence(s, t))
 	// Получаем количество горутин
-	fmt.Println("Number of goroutines:", runtime.NumGoroutine())
+	// fmt.Println("Number of goroutines:", runtime.NumGoroutine())
 }
 
 func isSubsequence(s string, t string) bool {
-	start := time.Now()
+	// start := time.Now()
 
 	mid := len(t) / 2
 	// fmt.Println(t[:mid])
@@ -78,7 +76,23 @@ func isSubsequence(s string, t string) bool {
 		res[item.ind] = item.val
 		fmt.Println(res)
 	}
-	return true
+
+	// Сравнение полученного результата с исходной строкой s
+	result := ""
+	for _, val := range res {
+		result += val
+	}
+	// fmt.Println("Result:", result)
+
+	// Замер времени выполнения
+	// elapsed := time.Since(start)
+	// fmt.Printf("Execution time: %s\n", elapsed)
+	if result == s {
+		return true
+	} else {
+		return false
+	}
+
 }
 
 // "mdadm": "4.1-11"
