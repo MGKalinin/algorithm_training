@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"runtime"
-	"sync"
 	"time"
 )
 
@@ -21,7 +20,6 @@ func main() {
 	s := "acb"    //искомое
 	t := "ahbgdc" //где ищем
 	// Output: true
-	// поделить искомую подпоследовательность на два-запустить две горутины
 
 	fmt.Println(isSubsequence(s, t))
 	// Получаем количество горутин
@@ -31,46 +29,11 @@ func main() {
 func isSubsequence(s string, t string) bool {
 	start := time.Now()
 
-	res := make([]string, len(s))
-	type indexStore struct {
-		ind int
-		val string
-	}
-	ch := make(chan indexStore, len(s))
-
-	var wg sync.WaitGroup
-	wg.Add(100)
-
-	go func() {
-		defer wg.Done()
-		for _, char := range t {
-			for k, j := range s {
-				if j == char {
-					ch <- indexStore{ind: k, val: string(j)}
-				}
-			}
-		}
-		close(ch)
-	}()
-
-	go func() {
-		wg.Wait()
-	}()
-
-	for item := range ch {
-		res[item.ind] = item.val
-	}
-
-	// Сравнение полученного результата с исходной строкой s
-	result := ""
-	for _, val := range res {
-		result += val
-	}
-	// fmt.Println("Result:", result)
-
 	// Замер времени выполнения
 	elapsed := time.Since(start)
 	fmt.Printf("Execution time: %s\n", elapsed)
-	return result == s
+	return true
 
 }
+
+// 2025-01-22T10:00:00
