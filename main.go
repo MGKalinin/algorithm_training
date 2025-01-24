@@ -19,7 +19,7 @@ func main() {
 
 	s := "acb"    //искомое
 	t := "ahbgdc" //где ищем
-	// Output: true
+	// Output: false
 
 	fmt.Println(isSubsequence(s, t))
 	// Получаем количество горутин
@@ -28,12 +28,25 @@ func main() {
 
 func isSubsequence(s string, t string) bool {
 	start := time.Now()
+	//одна горутина ищет первую половину s, вторая -вторую?
+	ans := ""
+	for _, v := range t {
+		for _, z := range s {
+			if z == v {
+				ans += string(v)
+			}
+		}
+	}
 
+	fmt.Println(ans)
 	// Замер времени выполнения
 	elapsed := time.Since(start)
 	fmt.Printf("Execution time: %s\n", elapsed)
-	return true
+	return ans == s
 
 }
 
 // 2025-01-22T10:00:00
+func newSeach(s string, t string) bool {
+
+}
