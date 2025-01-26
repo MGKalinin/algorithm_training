@@ -34,5 +34,24 @@ func main() {
 }
 
 func isValidSudoku(board [][]byte) bool {
+	for _, i := range board {
+		if !checkRow(i) {
+			return false
+		}
+	}
+	return true
+}
 
+// проверка строки
+func checkRow(sliceRune []byte) bool {
+	checkMap := make(map[byte]bool)
+	for _, i := range sliceRune {
+		if i != '.' {
+			if checkMap[i] {
+				return false
+			}
+			checkMap[i] = true
+		}
+	}
+	return true
 }
