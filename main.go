@@ -62,8 +62,11 @@ func isValidSudoku(board [][]byte) bool {
 		//	проверка блоков 3*3
 
 	}
-
-	return true
+	go func() {
+		wg.Wait()
+		close(ch)
+	}()
+	return len(ch) == 3
 }
 
 // написать функцию проверки byte слайса
