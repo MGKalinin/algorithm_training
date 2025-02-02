@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"runtime"
+	"sync"
 )
 
 // 36. Valid Sudoku
@@ -34,23 +35,46 @@ func main() {
 }
 
 func isValidSudoku(board [][]byte) bool {
-	for _, i := range board {
-		if !checkRow(i) {
-			return false
-		}
+	var wg sync.WaitGroup
+	ch := make(chan bool, 3)
+	for i := 0; i < len(board); i++ {
+		wg.Add(3)
+		//проверка строки
+		go func(row int) {
+			defer wg.Done()
+			if !checkUnique(board[row]) {
+				ch <- false
+			}
+			ch <- true
+		}(i)
+		// проверка столбца
+		go func(col int) {
+			defer wg.Done()
+			column := make([]byte, 9)
+			for j := 0; j < 9; j++ {
+				column[i] = board[col][j]
+				if !checkUnique(column) {
+					ch <- false
+				}
+				ch <- true
+			}
+		}(i)
+		//	проверка блоков 3*3
+
 	}
+
 	return true
 }
 
-// проверка строки
-func checkRow(sliceRune []byte) bool {
-	checkMap := make(map[byte]bool)
-	for _, i := range sliceRune {
-		if i != '.' {
-			if checkMap[i] {
+// написать функцию проверки byte слайса
+func checkUnique(items []byte) bool {
+	checkmap := make(map[byte]bool)
+	for _, v := range items {
+		if v != '.' {
+			if checkmap[v] {
 				return false
 			}
-			checkMap[i] = true
+			checkmap[v] = true
 		}
 	}
 	return true
