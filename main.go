@@ -6,7 +6,7 @@ import (
 	"sync"
 )
 
-// 36. Valid Sudoku
+// 36. Valid Sudoku // TODO: solved
 // https://leetcode.com/problems/valid-sudoku/description/?envType=problem-list-v2&envId=29p0sxl6
 
 func main() {
@@ -44,6 +44,7 @@ func isValidSudoku(board [][]byte) bool {
 			defer wg.Done()
 			if !checkUnique(board[row]) {
 				ch <- false
+				return
 			}
 			ch <- true
 		}(i)
@@ -52,24 +53,48 @@ func isValidSudoku(board [][]byte) bool {
 			defer wg.Done()
 			column := make([]byte, 9)
 			for j := 0; j < 9; j++ {
-				column[i] = board[col][j]
-				if !checkUnique(column) {
-					ch <- false
-				}
-				ch <- true
+				column[j] = board[j][col]
 			}
+			if !checkUnique(column) {
+				ch <- false
+				return
+			}
+			ch <- true
 		}(i)
 		//	проверка блоков 3*3
-
+		go func(block int) {
+			defer wg.Done()
+			rowBase := (block / 3) * 3
+			colBase := (block % 3) * 3
+			subBox := make([]byte, 9)
+			index := 0
+			for r := rowBase; r < rowBase+3; r++ {
+				for c := colBase; c < colBase+3; c++ {
+					subBox[index] = board[r][c]
+					index++
+				}
+			}
+			if !checkUnique(subBox) {
+				ch <- false
+				return
+			}
+			ch <- true
+		}(i)
 	}
+
 	go func() {
 		wg.Wait()
 		close(ch)
 	}()
-	return len(ch) == 3
+	for result := range ch {
+		if !result {
+			return false
+		}
+	}
+	return true
 }
 
-// написать функцию проверки byte слайса
+// функция проверки byte слайса
 func checkUnique(items []byte) bool {
 	checkmap := make(map[byte]bool)
 	for _, v := range items {
