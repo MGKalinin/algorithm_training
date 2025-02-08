@@ -6,8 +6,8 @@ import (
 	"sync"
 )
 
-// 70. Climbing Stairs
-// https://leetcode.com/problems/climbing-stairs/description/?envType=problem-list-v2&envId=dynamic-programming
+// 118. Pascal's Triangle
+// https://leetcode.com/problems/pascals-triangle/description/?envType=problem-list-v2&envId=dynamic-programming
 
 func main() {
 	// reader := bufio.NewReader(os.Stdin)
@@ -15,18 +15,12 @@ func main() {
 	// line, _ := reader.ReadString('\n')
 	// line = strings.TrimSpace(line) // Убираем символ новой строки и пробелы
 
-	n := 3
-	//Output: 3
-	//Explanation: There are three ways to climb to the top.
-	//	1. 1 step + 1 step + 1 step
-	//	2. 1 step + 2 steps
-	//	3. 2 steps + 1 step
-
-	fmt.Println(climbStairs(n))
+	numRows := 5
+	//Output: [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]
+	fmt.Println(generate(numRows))
 	// Получаем количество горутин
 	fmt.Println("Number of goroutines:", runtime.NumGoroutine())
 }
-
-func climbStairs(n int) int {
+func generate(numRows int) [][]int {
 
 }
