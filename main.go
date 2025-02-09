@@ -22,5 +22,16 @@ func main() {
 }
 
 func longestPalindrome(s string) string {
+	checkPal := func(s string, i, j int) bool {
+		result := ""
+		for end := j; end >= i; end-- {
+			result += string(s[end])
+		}
+		return result == s
+	}
+	n := len(s)
+	dp := make([][]bool, n)
+	fmt.Println(dp)
 
+	return s
 }
