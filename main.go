@@ -5,8 +5,8 @@ import (
 	"runtime"
 )
 
-// 509. Fibonacci Number
-// https://leetcode.com/problems/fibonacci-number/description/?envType=problem-list-v2&envId=dynamic-programming
+// 5. Longest Palindromic Substring
+// https://leetcode.com/problems/longest-palindromic-substring/description/?envType=problem-list-v2&envId=dynamic-programming
 
 func main() {
 	// reader := bufio.NewReader(os.Stdin)
@@ -14,13 +14,13 @@ func main() {
 	// line, _ := reader.ReadString('\n')
 	// line = strings.TrimSpace(line) // Убираем символ новой строки и пробелы
 
-	n := 4
-	//Output: 3
-	fmt.Println(fib(n))
+	s := "babad"
+	//Output: "bab"
+	fmt.Println(longestPalindrome(s))
 	// Получаем количество горутин
 	fmt.Println("Number of goroutines:", runtime.NumGoroutine())
 }
 
-func fib(n int) int {
+func longestPalindrome(s string) string {
 
 }
