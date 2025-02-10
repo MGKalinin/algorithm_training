@@ -5,8 +5,8 @@ import (
 	"runtime"
 )
 
-// 5. Longest Palindromic Substring
-// https://leetcode.com/problems/longest-palindromic-substring/description/?envType=problem-list-v2&envId=dynamic-programming
+// 1641. Count Sorted Vowel Strings
+// https://leetcode.com/problems/count-sorted-vowel-strings/description/?envType=problem-list-v2&envId=dynamic-programming
 
 func main() {
 	// reader := bufio.NewReader(os.Stdin)
@@ -14,24 +14,17 @@ func main() {
 	// line, _ := reader.ReadString('\n')
 	// line = strings.TrimSpace(line) // Убираем символ новой строки и пробелы
 
-	s := "babad"
-	//Output: "bab"
-	fmt.Println(longestPalindrome(s))
+	n := 2
+	//Output: 15
+	//Explanation: The 15 sorted strings that consist of vowels only are
+	//["aa","ae","ai","ao","au","ee","ei","eo","eu","ii","io","iu","oo","ou","uu"].
+	//	Note that "ea" is not a valid string since 'e' comes after 'a' in the alphabet.
+
+	fmt.Println(countVowelStrings(n))
 	// Получаем количество горутин
 	fmt.Println("Number of goroutines:", runtime.NumGoroutine())
 }
 
-func longestPalindrome(s string) string {
-	checkPal := func(s string, i, j int) bool {
-		result := ""
-		for end := j; end >= i; end-- {
-			result += string(s[end])
-		}
-		return result == s
-	}
-	n := len(s)
-	dp := make([][]bool, n)
-	fmt.Println(dp)
+func countVowelStrings(n int) int {
 
-	return s
 }
