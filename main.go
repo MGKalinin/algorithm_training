@@ -9,12 +9,20 @@ import (
 // https://leetcode.com/problems/two-sum-iv-input-is-a-bst/description/?envType=problem-list-v2&envId=binary-search-tree
 
 func main() {
-	// reader := bufio.NewReader(os.Stdin)
-	// // считать размер массива
-	// line, _ := reader.ReadString('\n')
-	// line = strings.TrimSpace(line) // Убираем символ новой строки и пробелы
 
-	root = []int{5, 3, 6, 2, 4, null, 7}
+	// Конструируем бинарное дерево из среза root = [5,3,6,2,4,null,7]
+	root := &TreeNode{
+		Val: 5,
+		Left: &TreeNode{
+			Val:   3,
+			Left:  &TreeNode{Val: 2},
+			Right: &TreeNode{Val: 4},
+		},
+		Right: &TreeNode{
+			Val:   6,
+			Right: &TreeNode{Val: 7},
+		},
+	}
 	k := 9
 	//Output: true
 
@@ -23,14 +31,14 @@ func main() {
 	fmt.Println("Number of goroutines:", runtime.NumGoroutine())
 }
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
+// Definition for a binary tree node.
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
 func findTarget(root *TreeNode, k int) bool {
 
 }
