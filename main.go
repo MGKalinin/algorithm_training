@@ -5,12 +5,11 @@ import (
 	"runtime"
 )
 
-// 653. Two Sum IV - Input is a BST
-// https://leetcode.com/problems/two-sum-iv-input-is-a-bst/description/?envType=problem-list-v2&envId=binary-search-tree
+// 700. Search in a Binary Search Tree
+// https://leetcode.com/problems/search-in-a-binary-search-tree/description/?envType=problem-list-v2&envId=binary-search-tree
 
 func main() {
-
-	// Конструируем бинарное дерево из среза root = [5,3,6,2,4,null,7]
+	//root = [4,2,7,1,3]
 	root := &TreeNode{
 		Val: 5,
 		Left: &TreeNode{
@@ -23,15 +22,13 @@ func main() {
 			Right: &TreeNode{Val: 7},
 		},
 	}
-	k := 9
+	val := 2
 	//Output: true
 
-	fmt.Println(findTarget(root, k))
+	fmt.Println(searchBST(root, val))
 	// Получаем количество горутин
 	fmt.Println("Number of goroutines:", runtime.NumGoroutine())
 }
-
-// Definition for a binary tree node.
 
 type TreeNode struct {
 	Val   int
@@ -39,6 +36,6 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-func findTarget(root *TreeNode, k int) bool {
+func searchBST(root *TreeNode, val int) *TreeNode {
 
 }
