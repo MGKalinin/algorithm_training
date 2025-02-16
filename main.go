@@ -5,37 +5,19 @@ import (
 	"runtime"
 )
 
-// 700. Search in a Binary Search Tree
-// https://leetcode.com/problems/search-in-a-binary-search-tree/description/?envType=problem-list-v2&envId=binary-search-tree
+// 1200. Minimum Absolute Difference
+// https://leetcode.com/problems/minimum-absolute-difference/description/?envType=problem-list-v2&envId=29p0sxl6
 
 func main() {
-	//root = [4,2,7,1,3]
-	root := &TreeNode{
-		Val: 5,
-		Left: &TreeNode{
-			Val:   3,
-			Left:  &TreeNode{Val: 2},
-			Right: &TreeNode{Val: 4},
-		},
-		Right: &TreeNode{
-			Val:   6,
-			Right: &TreeNode{Val: 7},
-		},
-	}
-	val := 2
-	//Output: true
+	arr := []int{4, 2, 1, 3}
+	//Output: [[1,2],[2,3],[3,4]]
+	//Explanation: The minimum absolute difference is 1. List all pairs with difference equal to 1 in ascending order.
 
-	fmt.Println(searchBST(root, val))
+	fmt.Println(minimumAbsDifference(arr))
 	// Получаем количество горутин
 	fmt.Println("Number of goroutines:", runtime.NumGoroutine())
 }
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
-func searchBST(root *TreeNode, val int) *TreeNode {
+func minimumAbsDifference(arr []int) [][]int {
 
 }
