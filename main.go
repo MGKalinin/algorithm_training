@@ -5,19 +5,34 @@ import (
 	"runtime"
 )
 
-// 1200. Minimum Absolute Difference
-// https://leetcode.com/problems/minimum-absolute-difference/description/?envType=problem-list-v2&envId=29p0sxl6
+// 121. Best Time to Buy and Sell Stock
+// https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/?envType=problem-list-v2&envId=dynamic-programming
 
 func main() {
-	arr := []int{4, 2, 1, 3}
-	//Output: [[1,2],[2,3],[3,4]]
-	//Explanation: The minimum absolute difference is 1. List all pairs with difference equal to 1 in ascending order.
+	prices := []int{7, 1, 5, 3, 6, 4}
 
-	fmt.Println(minimumAbsDifference(arr))
+	fmt.Println(maxProfit(prices))
 	// Получаем количество горутин
 	fmt.Println("Number of goroutines:", runtime.NumGoroutine())
 }
 
-func minimumAbsDifference(arr []int) [][]int {
+func maxProfit(prices []int) int {
+	n := len(prices)
+	dp := make([]int, n+1)
+	//fmt.Println(dp)
+	dp[1] = prices[0]
+	//fmt.Println(dp)
+	for i := 2; i <= n; i++ {
+		dp[i] = dp[i-1] - prices[i-1]
+	}
+	fmt.Println(dp)
+	return dp[n]
+}
 
+func maximum(a, b int) int {
+	if a > b {
+		return a
+	} else {
+		return b
+	}
 }
