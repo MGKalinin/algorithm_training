@@ -18,19 +18,13 @@ func main() {
 
 func maxProfit(prices []int) int {
 	n := len(prices)
-	dp := make([]int, n+1)
-	for i := 0; i < n; i++ {
-		if prices[i] < prices[i+1] {
-			//dp[i]=
+	minVal, maxRes := prices[0], 0
+	for i := 1; i < n; i++ {
+		if maxRes < prices[i]-minVal {
+			maxRes = prices[i] - minVal
+		} else if prices[i] < minVal {
+			minVal = prices[i]
 		}
 	}
-	return dp[n]
-}
-
-func maximum(a, b int) int {
-	if a > b {
-		return a
-	} else {
-		return b
-	}
+	return maxRes
 }
