@@ -5,26 +5,19 @@ import (
 	"runtime"
 )
 
-// 121. Best Time to Buy and Sell Stock
-// https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/?envType=problem-list-v2&envId=dynamic-programming
+// 5. Longest Palindromic Substring
+// https://leetcode.com/problems/longest-palindromic-substring/description/?envType=problem-list-v2&envId=dynamic-programming
 
 func main() {
-	prices := []int{7, 1, 5, 3, 6, 4}
+	s := "babad"
+	//Output: "bab"
+	//Explanation: "aba" is also a valid answer.
 
-	fmt.Println(maxProfit(prices))
+	fmt.Println(longestPalindrome(s))
 	// Получаем количество горутин
 	fmt.Println("Number of goroutines:", runtime.NumGoroutine())
 }
 
-func maxProfit(prices []int) int {
-	n := len(prices)
-	minVal, maxRes := prices[0], 0
-	for i := 1; i < n; i++ {
-		if maxRes < prices[i]-minVal {
-			maxRes = prices[i] - minVal
-		} else if prices[i] < minVal {
-			minVal = prices[i]
-		}
-	}
-	return maxRes
+func longestPalindrome(s string) string {
+
 }
