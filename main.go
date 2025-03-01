@@ -5,25 +5,22 @@ import (
 	"runtime"
 )
 
-// 395. Longest Substring with At Least K Repeating Characters
-// https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/description/?envType=problem-list-v2&envId=29p0sxl6
+// 345. Reverse Vowels of a String
+// https://leetcode.com/problems/reverse-vowels-of-a-string/description/?envType=study-plan-v2&envId=leetcode-75
 
 func main() {
-	s := "aaabb"
-	k := 3
-	//Output: 3
-	//Explanation: The longest substring is "aaa", as 'a' is repeated 3 times.
-	fmt.Println(longestPalindrome(s))
+	s := "IceCreAm"
+	//Output: "AceCreIm"
+	//Explanation:
+	//	The vowels in s are ['I', 'e', 'e', 'A']. On reversing the vowels, s becomes "AceCreIm".
+
+	fmt.Println(reverseVowels(s))
 	// Получаем количество горутин
 	fmt.Println("Number of goroutines:", runtime.NumGoroutine())
 }
 
-func longestSubstring(s string, k int) int {
-	//Вот пошаговый алгоритм:
-	//Подсчитать частоту символов в строке.
-	//	Найти символы, которые встречаются реже, чем k. Они разделят строку на подстроки.
-	//	Запустить горутину для обработки каждой подстроки параллельно.
-	//	Использовать каналы для сбора результатов.
-	//	Вернуть максимальную длину подходящей подстроки.
+func reverseVowels(s string) string {
+	vowels := []rune{'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'}
+	start, end := 0, len(s)
 
 }
