@@ -22,5 +22,5 @@ func main() {
 func reverseVowels(s string) string {
 	vowels := []rune{'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'}
 	start, end := 0, len(s)
-
+if s[start] && s[end]
 }
