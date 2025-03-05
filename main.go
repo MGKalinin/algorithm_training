@@ -19,5 +19,13 @@ func main() {
 }
 
 func reverseWords(s string) string {
+	fields := strings.Fields(s)         // Разделяет строку на слова
+	result := strings.Join(fields, " ") // Объединяет слова с одним пробелом
+	start, end := 0, len(s)-1
+	for start < end {
+		if result[start] != ' ' || result[end] != ' ' {
 
+		}
+	}
+	return s
 }
