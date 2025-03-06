@@ -6,26 +6,18 @@ import (
 	"strings"
 )
 
-// 151. Reverse Words in a String
-// https://leetcode.com/problems/reverse-words-in-a-string/description/?envType=study-plan-v2&envId=leetcode-75
+// 674. Longest Continuous Increasing Subsequence
+// https://leetcode.com/problems/longest-continuous-increasing-subsequence/description/?envType=problem-list-v2&envId=27tz3m7t
 
 func main() {
-	s := "the sky is blue"
-	//Output: "blue is sky the"
+	nums := []int{1, 3, 5, 4, 7}
+	//Output: 3
 
-	fmt.Println(reverseWords(s))
+	fmt.Println(findLengthOfLCIS(nums))
 	// Получаем количество горутин
 	fmt.Println("Number of goroutines:", runtime.NumGoroutine())
 }
 
-func reverseWords(s string) string {
-	fields := strings.Fields(s)         // Разделяет строку на слова
-	result := strings.Join(fields, " ") // Объединяет слова с одним пробелом
-	start, end := 0, len(s)-1
-	for start < end {
-		if result[start] != ' ' || result[end] != ' ' {
+func findLengthOfLCIS(nums []int) int {
 
-		}
-	}
-	return s
 }
