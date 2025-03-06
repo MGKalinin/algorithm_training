@@ -19,5 +19,8 @@ func main() {
 }
 
 func findLengthOfLCIS(nums []int) int {
+	dp := make([]int, len(nums)+1)
+	for i := 0; i <= len(dp); i++ {
 
+	}
 }
