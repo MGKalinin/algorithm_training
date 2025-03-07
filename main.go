@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"runtime"
-	"strings"
 )
 
 // 416. Partition Equal Subset Sum
@@ -19,5 +18,15 @@ func main() {
 }
 
 func canPartition(nums []int) bool {
+	sum := 0
+	for i := 0; i <= len(nums)-1; i++ {
+		sum += nums[i]
+	}
+	dp := make([]int, len(nums))
+	purpose := sum / 2
 
+	fmt.Println(sum)
+	fmt.Println(purpose)
+	fmt.Println(dp)
+	return sum > 0
 }
