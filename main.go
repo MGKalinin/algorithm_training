@@ -3,30 +3,21 @@ package main
 import (
 	"fmt"
 	"runtime"
+	"strings"
 )
 
-// 416. Partition Equal Subset Sum
-// https://leetcode.com/problems/partition-equal-subset-sum/description/?envType=problem-list-v2&envId=27tz3m7t
+// 238. Product of Array Except Self
+// https://leetcode.com/problems/product-of-array-except-self/description/?envType=study-plan-v2&envId=leetcode-75
 
 func main() {
-	nums := []int{1, 5, 11, 5}
-	//true
+	nums := []int{1, 2, 3, 4}
+	//Output: [24,12,8,6]
 
-	fmt.Println(canPartition(nums))
+	fmt.Println(productExceptSelf(nums))
 	// Получаем количество горутин
 	fmt.Println("Number of goroutines:", runtime.NumGoroutine())
 }
 
-func canPartition(nums []int) bool {
-	sum := 0
-	for i := 0; i <= len(nums)-1; i++ {
-		sum += nums[i]
-	}
-	dp := make([]int, len(nums))
-	purpose := sum / 2
+func productExceptSelf(nums []int) []int {
 
-	fmt.Println(sum)
-	fmt.Println(purpose)
-	fmt.Println(dp)
-	return sum > 0
 }
