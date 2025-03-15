@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"runtime"
-	"strings"
+	//"strings"
 )
 
 // 238. Product of Array Except Self
@@ -19,5 +19,16 @@ func main() {
 }
 
 func productExceptSelf(nums []int) []int {
+	//res:=1
 
+	for i := 1; i <= len(nums)-2; i++ {
+		//fmt.Println(nums[i-1])
+		//fmt.Println(nums[i+1])
+		one := 1
+		two := 1
+		one *= nums[i-1]
+		two *= nums[i+1]
+		//fmt.Println(one, two)
+	}
+	return nums
 }
