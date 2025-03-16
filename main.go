@@ -2,33 +2,39 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"runtime"
+	"sort"
 	//"strings"
 )
 
-// 238. Product of Array Except Self
-// https://leetcode.com/problems/product-of-array-except-self/description/?envType=study-plan-v2&envId=leetcode-75
+// 1200. Minimum Absolute Difference
+// https://leetcode.com/problems/minimum-absolute-difference/description/?envType=problem-list-v2&envId=29p0sxl6
 
 func main() {
-	nums := []int{1, 2, 3, 4}
-	//Output: [24,12,8,6]
+	arr := []int{4, 2, 1, 3}
+	//Output: [[1,2],[2,3],[3,4]]
+	//Explanation: The minimum absolute difference is 1. List all pairs with difference equal to 1 in ascending order.
 
-	fmt.Println(productExceptSelf(nums))
+	fmt.Println(minimumAbsDifference(arr))
 	// Получаем количество горутин
 	fmt.Println("Number of goroutines:", runtime.NumGoroutine())
 }
 
-func productExceptSelf(nums []int) []int {
-	//res:=1
-
-	for i := 1; i <= len(nums)-2; i++ {
-		//fmt.Println(nums[i-1])
-		//fmt.Println(nums[i+1])
-		one := 1
-		two := 1
-		one *= nums[i-1]
-		two *= nums[i+1]
-		//fmt.Println(one, two)
+func minimumAbsDifference(arr []int) [][]int {
+	sort.Ints(arr)
+	pairs := [][]int{}
+	minDiff := math.MaxInt64
+	for i := 0; i < len(arr)-1; i++ {
+		diff := arr[i+1] - arr[i]
+		if diff < minDiff {
+			minDiff = diff
+			pairs = [][]int{{arr[i], arr[i+1]}}
+		} else if diff == minDiff {
+			pairs = append(pairs, []int{arr[i], arr[i+1]})
+		}
 	}
-	return nums
+	return pairs
 }
+
+//TODO: переделать в многопоточность
