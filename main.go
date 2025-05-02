@@ -2,39 +2,41 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"runtime"
-	"sort"
 	//"strings"
 )
 
-// 1200. Minimum Absolute Difference
-// https://leetcode.com/problems/minimum-absolute-difference/description/?envType=problem-list-v2&envId=29p0sxl6
+// 238. Product of Array Except Self
+// https://leetcode.com/problems/product-of-array-except-self/description/?envType=study-plan-v2&envId=leetcode-75
 
 func main() {
-	arr := []int{4, 2, 1, 3}
-	//Output: [[1,2],[2,3],[3,4]]
-	//Explanation: The minimum absolute difference is 1. List all pairs with difference equal to 1 in ascending order.
+	nums := []int{1, 2, 3, 4}
+	//Output: [24,12,8,6]
 
-	fmt.Println(minimumAbsDifference(arr))
+	fmt.Println(productExceptSelf(nums))
 	// Получаем количество горутин
 	fmt.Println("Number of goroutines:", runtime.NumGoroutine())
 }
 
-func minimumAbsDifference(arr []int) [][]int {
-	sort.Ints(arr)
-	pairs := [][]int{}
-	minDiff := math.MaxInt64
-	for i := 0; i < len(arr)-1; i++ {
-		diff := arr[i+1] - arr[i]
-		if diff < minDiff {
-			minDiff = diff
-			pairs = [][]int{{arr[i], arr[i+1]}}
-		} else if diff == minDiff {
-			pairs = append(pairs, []int{arr[i], arr[i+1]})
-		}
+// productExceptSelf Product of Array Except Self
+func productExceptSelf(nums []int) []int {
+	n := len(nums)
+	result := make([]int, n)
+	prefix := make([]int, n)
+	prefix[0] = 1
+	suffix := make([]int, n)
+	suffix[n-1] = 1
+	for i := 1; i < n; i++ {
+		prefix[i] = prefix[i-1] * nums[i-1]
+		//fmt.Println("prefix", prefix, prefix[i-1], nums[i-1])
 	}
-	return pairs
+	for i := n - 2; i >= 0; i-- {
+		suffix[i] = suffix[i+1] * nums[i+1]
+		//fmt.Println("suffix", suffix, suffix[i+1], nums[i+1])
+	}
+	for i := 0; i < n; i++ {
+		result[i] = prefix[i] * suffix[i]
+		//fmt.Println(result)
+	}
+	return result
 }
-
-//TODO: переделать в многопоточность

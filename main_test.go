@@ -1,37 +1,42 @@
+// main_test.go
+// go test -v запуск тестов
 package main
 
 import (
-	"fmt"
 	"testing"
 )
 
-// функция тестирования prefixSum
-func TestPrefixSum(t *testing.T) {
+func TestProductExceptSelf(t *testing.T) {
 	tests := []struct {
-		arr    []int
-		n      int
-		l      int
-		r      int
-		expect int
+		input  []int
+		expect []int
 	}{
-
-		{[]int{1, 2, 3, 4}, 4, 1, 1, 1},
-		{[]int{1, 2, 3, 4}, 4, 1, 2, 3},
-		{[]int{1, 2, 3, 4}, 4, 1, 3, 6},
-		{[]int{1, 2, 3, 4}, 4, 1, 4, 10},
-		{[]int{1, 2, 3, 4}, 4, 2, 2, 2},
-		{[]int{1, 2, 3, 4}, 4, 2, 3, 5},
-		{[]int{1, 2, 3, 4}, 4, 2, 4, 9},
-		{[]int{1, 2, 3, 4}, 4, 3, 3, 3},
-		{[]int{1, 2, 3, 4}, 4, 3, 4, 7},
-		{[]int{1, 2, 3, 4}, 4, 4, 4, 4},
+		{
+			input:  []int{1, 2, 3, 4},
+			expect: []int{24, 12, 8, 6},
+		},
+		{
+			input:  []int{-1, 1, 0, -3, 3},
+			expect: []int{0, 0, 9, 0, 0},
+		},
 	}
+
 	for i, test := range tests {
-		result := prefixSum(test.arr, test.n, test.l, test.r)
-		if result != test.expect {
-			fmt.Printf("Тест %d провален: ожидалось %d, получено %d\n", i+1, test.expect, result)
-		} else {
-			fmt.Printf("Тест %d пройден\n", i+1)
+		result := productExceptSelf(test.input)
+		if !slicesEqual(result, test.expect) {
+			t.Errorf("Test %d failed:\nExpected: %v\nGot:      %v", i+1, test.expect, result)
 		}
 	}
+}
+
+func slicesEqual(a, b []int) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i := range a {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+	return true
 }
