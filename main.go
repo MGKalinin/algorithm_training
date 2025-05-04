@@ -2,41 +2,36 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"runtime"
-	//"strings"
 )
 
-// 238. Product of Array Except Self
-// https://leetcode.com/problems/product-of-array-except-self/description/?envType=study-plan-v2&envId=leetcode-75
+// 334. Increasing Triplet Subsequence
+// https://leetcode.com/problems/increasing-triplet-subsequence/description/?envType=study-plan-v2&envId=leetcode-75
 
 func main() {
-	nums := []int{1, 2, 3, 4}
-	//Output: [24,12,8,6]
+	nums := []int{2, 4, -2, -3}
+	//Output: true
+	//Explanation: Any triplet where i < j < k is valid.
 
-	fmt.Println(productExceptSelf(nums))
+	fmt.Println(increasingTriplet(nums))
 	// Получаем количество горутин
 	fmt.Println("Number of goroutines:", runtime.NumGoroutine())
 }
 
-// productExceptSelf Product of Array Except Self
-func productExceptSelf(nums []int) []int {
-	n := len(nums)
-	result := make([]int, n)
-	prefix := make([]int, n)
-	prefix[0] = 1
-	suffix := make([]int, n)
-	suffix[n-1] = 1
-	for i := 1; i < n; i++ {
-		prefix[i] = prefix[i-1] * nums[i-1]
-		//fmt.Println("prefix", prefix, prefix[i-1], nums[i-1])
+// increasingTriplet Increasing Triplet Subsequence
+func increasingTriplet(nums []int) bool {
+	first := math.MaxInt
+	second := math.MaxInt
+	for _, num := range nums {
+		if num > second {
+			return true
+		}
+		if num <= first {
+			first = num
+		} else if num <= second {
+			second = num
+		}
 	}
-	for i := n - 2; i >= 0; i-- {
-		suffix[i] = suffix[i+1] * nums[i+1]
-		//fmt.Println("suffix", suffix, suffix[i+1], nums[i+1])
-	}
-	for i := 0; i < n; i++ {
-		result[i] = prefix[i] * suffix[i]
-		//fmt.Println(result)
-	}
-	return result
+	return false
 }
