@@ -1,6 +1,6 @@
 // main_test.go
 // go test -v запуск тестов
-package main
+package _43StringCompression
 
 import (
 	"testing"
