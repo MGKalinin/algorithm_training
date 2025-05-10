@@ -1,9 +1,11 @@
+package main
+
 // main_test.go
 // go test -v запуск тестов
 package _43StringCompression
 
 import (
-	"testing"
+"testing"
 )
 
 func TestProductExceptSelf(t *testing.T) {
@@ -40,3 +42,4 @@ func slicesEqual(a, b []int) bool {
 	}
 	return true
 }
+
