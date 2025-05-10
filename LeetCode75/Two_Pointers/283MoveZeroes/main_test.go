@@ -1,45 +1,73 @@
+// go test -v запуск; перейти в директорию с кодом))
 package main
 
-// main_test.go
-// go test -v запуск тестов
-package _43StringCompression
-
 import (
-"testing"
+	"reflect"
+	"testing"
 )
 
-func TestProductExceptSelf(t *testing.T) {
+func TestMoveZeroes(t *testing.T) {
 	tests := []struct {
-		input  []int
-		expect []int
+		name     string
+		input    []int
+		expected []int
 	}{
 		{
-			input:  []int{1, 2, 3, 4},
-			expect: []int{24, 12, 8, 6},
+			name:     "basic case",
+			input:    []int{0, 1, 0, 3, 12},
+			expected: []int{1, 3, 12, 0, 0},
 		},
 		{
-			input:  []int{-1, 1, 0, -3, 3},
-			expect: []int{0, 0, 9, 0, 0},
+			name:     "no zeros",
+			input:    []int{1, 2, 3},
+			expected: []int{1, 2, 3},
+		},
+		{
+			name:     "all zeros",
+			input:    []int{0, 0, 0},
+			expected: []int{0, 0, 0},
+		},
+		{
+			name:     "zeros already at end",
+			input:    []int{1, 2, 0, 0},
+			expected: []int{1, 2, 0, 0},
+		},
+		{
+			name:     "zeros at beginning",
+			input:    []int{0, 0, 1, 2},
+			expected: []int{1, 2, 0, 0},
+		},
+		{
+			name:     "single zero",
+			input:    []int{0},
+			expected: []int{0},
+		},
+		{
+			name:     "single non-zero",
+			input:    []int{5},
+			expected: []int{5},
+		},
+		{
+			name:     "random zeros",
+			input:    []int{4, 0, 2, 0, 5},
+			expected: []int{4, 2, 5, 0, 0},
 		},
 	}
 
-	for i, test := range tests {
-		result := productExceptSelf(test.input)
-		if !slicesEqual(result, test.expect) {
-			t.Errorf("Test %d failed:\nExpected: %v\nGot:      %v", i+1, test.expect, result)
-		}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			// Создаем копию входного массива
+			inputCopy := make([]int, len(tt.input))
+			copy(inputCopy, tt.input)
+
+			// Вызываем тестируемую функцию
+			moveZeroes(inputCopy)
+
+			// Проверяем результат
+			if !reflect.DeepEqual(inputCopy, tt.expected) {
+				t.Errorf("For input %v, expected %v but got %v",
+					tt.input, tt.expected, inputCopy)
+			}
+		})
 	}
 }
-
-func slicesEqual(a, b []int) bool {
-	if len(a) != len(b) {
-		return false
-	}
-	for i := range a {
-		if a[i] != b[i] {
-			return false
-		}
-	}
-	return true
-}
-
