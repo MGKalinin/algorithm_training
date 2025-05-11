@@ -62,38 +62,38 @@ import "fmt"
 //Задача 3
 //Что выведет код?
 //==========================================
-
-type impl struct{}
-
-type I interface {
-	C()
-}
-
-func (*impl) C() {}
-
-func A() I {
-	return nil
-
-}
-func B() I {
-	var ret *impl
-	return ret
-}
-
-func main() {
-	a := A()
-	b := B()
-	fmt.Println(a == b)
-}
+//
+//type impl struct{}
+//
+//type I interface {
+//	C()
+//}
+//
+//func (*impl) C() {}
+//
+//func A() I {
+//	return nil
+//
+//}
+//func B() I {
+//	var ret *impl
+//	return ret
+//}
+//
+//func main() {
+//	a := A()            //nil
+//	b := B()            //nil
+//	fmt.Println(a == b) //true-решил с ошибкой - ответ false
+//}
 
 //==========================================
 //Задача 4
 //Что выведет код? Должны выводится все значения
 //==========================================
-//
-//func main() {
-//a := 5000
-//for i := 0; i < a; i++ {
-//go fmt.Println(i)
-//}
-//}
+
+func main() {
+	a := 5000
+	for i := 0; i < a; i++ {
+		go fmt.Println(i)
+	}
+}
