@@ -1,9 +1,6 @@
 package main
 
-import (
-	"fmt"
-	"sort"
-)
+import "fmt"
 
 //
 //==========================================
@@ -42,51 +39,53 @@ import (
 //Задача 2
 //Что выведет код?
 //==========================================
-
-func main() {
-	v := []int{3, 4, 1, 2, 5}
-	ap(v)
-	sr(v)
-	fmt.Println(v)
-}
-
-func ap(arr []int) {
-	arr = append(arr, 10)
-}
-
-func sr(arr []int) {
-	sort.Ints(arr)
-}
+//
+//func main() {
+//	v := []int{3, 4, 1, 2, 5}
+//	ap(v)
+//	sr(v)
+//	//fmt.Println(v) //[1 2 3 4 5]
+//}
+//
+//func ap(arr []int) {
+//	arr = append(arr, 10) //v := []int{3, 4, 1, 2, 5} ,10
+//	//fmt.Println(arr)
+//}
+//
+//func sr(arr []int) {
+//	sort.Ints(arr) //1 2 3 4 5 - ответ
+//	//fmt.Println(arr)
+//
+//}
 
 //==========================================
 //Задача 3
 //Что выведет код?
 //==========================================
-//
-//type impl struct{}
-//
-//type I interface {
-//C()
-//}
-//
-//func (*impl) C() {}
-//
-//func A() I {
-//return nil
-//
-//}
-//func B() I {
-//var ret *impl
-//return ret
-//}
-//
-//func main() {
-//a := A()
-//b := B()
-//fmt.Println(a == b)
-//}
-//
-//
+
+type impl struct{}
+
+type I interface {
+	C()
+}
+
+func (*impl) C() {}
+
+func A() I {
+	return nil
+
+}
+func B() I {
+	var ret *impl
+	return ret
+}
+
+func main() {
+	a := A()
+	b := B()
+	fmt.Println(a == b)
+}
+
 //==========================================
 //Задача 4
 //Что выведет код? Должны выводится все значения
