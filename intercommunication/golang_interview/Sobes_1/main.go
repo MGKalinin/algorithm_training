@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 //
 //==========================================
@@ -91,9 +93,15 @@ import "fmt"
 //Что выведет код? Должны выводится все значения
 //==========================================
 
-func main() {
+func main() { // main завершается не дожидаясь завершения горутин
 	a := 5000
+	//var wg sync.WaitGroup
 	for i := 0; i < a; i++ {
-		go fmt.Println(i)
-	}
+		//wg.Add(1)
+		go fmt.Println(i) //go func(n int){
+		//defer wg.Done()
+		//fmt.Println(n)
+	} //(i)
+	//}
+	//wg.Wait()
 }
