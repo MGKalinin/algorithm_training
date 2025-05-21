@@ -1,17 +1,25 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func maxOperations(nums []int, k int) int {
 	count := 0
-	var temp []int
-	copy(temp, nums) //копия для удаления элементов || указатель?
-	start, end := 0, len(temp)-1
-	case:
-		start<end{
-			if k-temp[start]!=temp[end]{
-
-	}
+	sort.Ints(nums)
+	start, end := 0, len(nums)-1
+	for start < end {
+		summ := nums[start] + nums[end]
+		if summ == k {
+			count++
+			start++
+			end--
+		} else if summ < k {
+			start++
+		} else {
+			end--
+		}
 	}
 	return count
 }
