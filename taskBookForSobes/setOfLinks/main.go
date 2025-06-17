@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"sync"
 )
 
 //Интерактивная задача на кодинг, приближенный к условиям
@@ -52,4 +53,53 @@ func main() {
 	//•
 	//Печать результатов на экран происходит в основном потоке
 
+	//	используя Worker Pool ==============================
+	var wg sync.WaitGroup
+	//Определяем количество воркеров (например, 3-5)
+	const numberWorker = 5
+	//Канал для задач (tasks): chan string
+	tasksChan := make(chan string)
+	//Канал для результатов (results): chan string
+	resultsChan := make(chan string)
+	//Создаем N горутин-воркеров
+	for i := 0; i < numberWorker; i++ {
+		wg.Add(1)
+		go worker(tasksChan, resultsChan, &wg)
+	}
+	// В отдельной горутине: Последовательно отправляет все URL в канал задач
+	go func() {
+		for _, url := range urls {
+			tasksChan <- url
+		}
+		close(tasksChan) // закрыть канал задач
+	}()
+	// Ожидания завершения всех воркеров & закрыть канал результатов
+	go func() {
+		wg.Wait()
+		close(resultsChan)
+	}()
+	// Основной поток: Читает результаты из канала результатов
+	for answer := range resultsChan {
+		fmt.Println(answer)
+	}
+	//используя Semaphore ==============================
+
+}
+
+// функция worker отправляет запрос, читает результат
+func worker(tasksChan <-chan string, resultsChan chan<- string, wg *sync.WaitGroup) {
+	defer wg.Done()
+	for url := range tasksChan {
+		response, err := http.Get(url)
+		if err != nil {
+			resultsChan <- fmt.Sprintf("адрес %s - not ok (ошибка: %v)", url, err)
+			continue
+		}
+		response.Body.Close()
+		if response.StatusCode == http.StatusOK {
+			resultsChan <- fmt.Sprintf("адрес %s - ok", url)
+		} else {
+			resultsChan <- fmt.Sprintf("адрес %s - not ok (статус: %d)", url, response.StatusCode)
+		}
+	}
 }
