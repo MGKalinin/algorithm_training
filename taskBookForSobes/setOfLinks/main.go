@@ -54,52 +54,101 @@ func main() {
 	//Печать результатов на экран происходит в основном потоке
 
 	//	используя Worker Pool ==============================
-	var wg sync.WaitGroup
-	//Определяем количество воркеров (например, 3-5)
-	const numberWorker = 5
-	//Канал для задач (tasks): chan string
-	tasksChan := make(chan string)
-	//Канал для результатов (results): chan string
-	resultsChan := make(chan string)
-	//Создаем N горутин-воркеров
-	for i := 0; i < numberWorker; i++ {
-		wg.Add(1)
-		go worker(tasksChan, resultsChan, &wg)
-	}
-	// В отдельной горутине: Последовательно отправляет все URL в канал задач
-	go func() {
-		for _, url := range urls {
-			tasksChan <- url
-		}
-		close(tasksChan) // закрыть канал задач
-	}()
-	// Ожидания завершения всех воркеров & закрыть канал результатов
-	go func() {
-		wg.Wait()
-		close(resultsChan)
-	}()
-	// Основной поток: Читает результаты из канала результатов
-	for answer := range resultsChan {
-		fmt.Println(answer)
-	}
+	//var wg sync.WaitGroup
+	////Определяем количество воркеров (например, 3-5)
+	//const numberWorker = 5
+	////Канал для задач (tasks): chan string
+	//tasksChan := make(chan string)
+	////Канал для результатов (results): chan string
+	//resultsChan := make(chan string)
+	////Создаем N горутин-воркеров
+	//for i := 0; i < numberWorker; i++ {
+	//	wg.Add(1)
+	//	go worker(tasksChan, resultsChan, &wg)
+	//}
+	//// В отдельной горутине: Последовательно отправляет все URL в канал задач
+	//go func() {
+	//	for _, url := range urls {
+	//		tasksChan <- url
+	//	}
+	//	close(tasksChan) // закрыть канал задач
+	//}()
+	//// Ожидания завершения всех воркеров & закрыть канал результатов
+	//go func() {
+	//	wg.Wait()
+	//	close(resultsChan)
+	//}()
+	//// Основной поток: Читает результаты из канала результатов
+	//for answer := range resultsChan {
+	//	fmt.Println(answer)
+	//}
+
 	//используя Semaphore ==============================
+	const maxParallel = 3 // Максимальное количество одновременных запросов
+	//семафор
+	sem := make(chan struct{}, maxParallel)
+	//Создать канал для результатов (буферизованный)
+	resultsChan := make(chan string)
+	//	Создать sync.WaitGroup для отслеживания завершения
+	var wg sync.WaitGroup
 
-}
+	for _, url := range urls {
+		wg.Add(1)
+		go func(u string) {
+			defer wg.Done()
+			// Захватываем слот в семафоре (ограничиваем параллелизм)
+			sem <- struct{}{}
+			// Гарантируем освобождение слота при выходе из функции
+			defer func() { <-sem }()
 
-// функция worker отправляет запрос, читает результат
-func worker(tasksChan <-chan string, resultsChan chan<- string, wg *sync.WaitGroup) {
-	defer wg.Done()
-	for url := range tasksChan {
-		response, err := http.Get(url)
-		if err != nil {
-			resultsChan <- fmt.Sprintf("адрес %s - not ok (ошибка: %v)", url, err)
-			continue
-		}
-		response.Body.Close()
-		if response.StatusCode == http.StatusOK {
-			resultsChan <- fmt.Sprintf("адрес %s - ok", url)
-		} else {
-			resultsChan <- fmt.Sprintf("адрес %s - not ok (статус: %d)", url, response.StatusCode)
-		}
+			// Выполняем HTTP-запрос
+			response, err := http.Get(u)
+			// Обработка ошибок сети/DNS
+			if err != nil {
+				// Если есть response (например, при ошибке редиректа), закрываем тело
+				if response != nil {
+					response.Body.Close()
+				}
+				resultsChan <- fmt.Sprintf("адрес %s - not ok (ошибка: %v)", u, err)
+				return
+			}
+			// Гарантированно закрываем тело ответа
+			defer response.Body.Close()
+			// Проверяем статус код
+			if response.StatusCode == http.StatusOK {
+				resultsChan <- fmt.Sprintf("адрес %s - ok", u)
+			} else {
+				resultsChan <- fmt.Sprintf("адрес %s - not ok (статус: %d)", u, response.StatusCode)
+			}
+
+		}(url)
+	}
+	// Запускаем горутину для закрытия канала результатов после завершения всех запросов
+	go func() {
+		wg.Wait()          // Ждем завершения всех горутин
+		close(resultsChan) // Закрываем канал результатов
+	}()
+
+	// Основной поток: читаем и выводим результаты
+	for result := range resultsChan {
+		fmt.Println(result)
 	}
 }
+
+//// функция worker отправляет запрос, читает результат
+//func worker(tasksChan <-chan string, resultsChan chan<- string, wg *sync.WaitGroup) {
+//	defer wg.Done()
+//	for url := range tasksChan {
+//		response, err := http.Get(url)
+//		if err != nil {
+//			resultsChan <- fmt.Sprintf("адрес %s - not ok (ошибка: %v)", url, err)
+//			continue
+//		}
+//		response.Body.Close()
+//		if response.StatusCode == http.StatusOK {
+//			resultsChan <- fmt.Sprintf("адрес %s - ok", url)
+//		} else {
+//			resultsChan <- fmt.Sprintf("адрес %s - not ok (статус: %d)", url, response.StatusCode)
+//		}
+//	}
+//}
