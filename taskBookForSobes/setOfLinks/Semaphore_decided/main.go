@@ -29,31 +29,39 @@ func main() {
 	//•
 	//Печать результатов на экран происходит в основном потоке
 
-	// Semaphore
+	// паттерн Semaphore
 	var wg sync.WaitGroup
 	const quantity = 3
 	sem := make(chan struct{}, quantity)
+
+	result := make(chan string, len(urls))
 	for _, url := range urls {
 		wg.Add(1)
 		go func(url string) {
 			defer wg.Done()
+
 			sem <- struct{}{}
 			defer func() { <-sem }()
 
 			resp, err := http.Get(url)
 			if err != nil {
-				fmt.Printf("адрес %v - not ok\n", url)
+				result <- fmt.Sprintf("адрес %v - not ok\n", url)
+				return
 			}
-			resp.Body.Close()
+			defer resp.Body.Close()
 
 			if resp.StatusCode == http.StatusOK {
-				fmt.Printf("адрес %v - ok\n", url)
+				result <- fmt.Sprintf("адрес %v - ok\n", url)
 			} else {
-				fmt.Printf("адрес %v - not ok \n", url)
+				result <- fmt.Sprintf("адрес %v - not ok \n", url)
 			}
 		}(url)
-		go func() {
-			wg.Wait()
-		}()
+	}
+	go func() {
+		wg.Wait()
+		close(result)
+	}()
+	for ans := range result {
+		fmt.Println(ans)
 	}
 }
