@@ -36,12 +36,13 @@ func main() {
 
 	result := make(chan string, len(urls))
 	for _, url := range urls {
-		wg.Add(1)
-		go func(url string) {
+		wg.Add(1)             //увеличивает счетчик ожидаемых горутин
+		go func(url string) { //Все 8 горутин запускаются сразу в цикле(8 адресов)
 			defer wg.Done()
 
-			sem <- struct{}{}
-			defer func() { <-sem }()
+			sem <- struct{}{} // Когда семафор заполнен (3 элемента),
+			// операция sem <- блокирует выполнение горутины
+			defer func() { <-sem }() //При освобождении слота (<-sem) одна из заблокированных горутин "просыпается"
 
 			resp, err := http.Get(url)
 			if err != nil {
