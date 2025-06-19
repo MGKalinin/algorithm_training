@@ -22,12 +22,38 @@ func main() {
 	}
 
 	//Напишите программу, которая:
-	//1. Поочередно выполнит http запросы по предложенному списку ссылок
+	//2. Модифицируйте программу таким образом, чтобы использовались каналы для
+	//коммуникации основного потока с горутинами. Пример:
 	//•
-	//в случае получения http-кода ответа на запрос "200 OK" печатаем на экране "адрес url -
-	//ok"
+	//Запросы по списку выполняются в горутинах.
 	//•
-	//в случае получения http-кода ответа на запрос отличного от "200 OK" либо в случае
-	//ошибки печатаем на экране "адрес url - not ok"
+	//Печать результатов на экран происходит в основном потоке
 
+	// Semaphore
+	var wg sync.WaitGroup
+	const quantity = 3
+	sem := make(chan struct{}, quantity)
+	for _, url := range urls {
+		wg.Add(1)
+		go func(url string) {
+			defer wg.Done()
+			sem <- struct{}{}
+			defer func() { <-sem }()
+
+			resp, err := http.Get(url)
+			if err != nil {
+				fmt.Printf("адрес %v - not ok\n", url)
+			}
+			resp.Body.Close()
+
+			if resp.StatusCode == http.StatusOK {
+				fmt.Printf("адрес %v - ok\n", url)
+			} else {
+				fmt.Printf("адрес %v - not ok \n", url)
+			}
+		}(url)
+		go func() {
+			wg.Wait()
+		}()
+	}
 }
