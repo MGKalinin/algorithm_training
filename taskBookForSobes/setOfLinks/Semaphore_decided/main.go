@@ -47,7 +47,7 @@ func main() {
 			resp, err := http.Get(url)
 			if err != nil {
 				result <- fmt.Sprintf("адрес %v - not ok\n", url)
-				return
+				return // Завершаем ЭТУ горутину (она обработала свой URL)
 			}
 			defer resp.Body.Close()
 
