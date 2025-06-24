@@ -86,9 +86,9 @@ func main() {
 }
 
 // 1.написать функцию считывающую вводимые данные
-func inputData(r io.Reader) []string { //TODO не используемый параметр r io.Reade ?
+func inputData(r io.Reader) []string {
 	urls := []string{}
-	scanner := bufio.NewScanner(os.Stdin)
+	scanner := bufio.NewScanner(r)
 	for scanner.Scan() {
 		url := scanner.Text()
 		urls = append(urls, url)
