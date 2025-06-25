@@ -1,5 +1,6 @@
 package main
 
+// TODO писать код в песочнице
 // TODO 1.fan-in - намудрить запрос разными горутинами и т.п.
 // TODO 2.semaphore
 // TODO 3.worker pool
