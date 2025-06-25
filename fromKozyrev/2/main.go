@@ -1,5 +1,8 @@
 package main
 
+// TODO 1.fan-in - намудрить запрос разными горутинами и т.п.
+// TODO 2.semaphore
+// TODO 3.worker pool
 //Озон Платформа
 //
 //Дата: февраль 2025
