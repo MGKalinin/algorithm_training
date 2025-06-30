@@ -1,9 +1,9 @@
 package main
 
 // TODO писать код в песочнице
-// TODO 2.semaphore
-// TODO 3.worker pool
-// TODO 4.использовать контекст отмены после двух 200 ок
+// TODO 1.semaphore
+// TODO 2.worker pool
+// TODO 3.использовать контекст отмены после двух 200 ок
 //Озон Платформа
 //
 //Дата: февраль 2025
