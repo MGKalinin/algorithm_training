@@ -33,5 +33,6 @@ func main() {
 
 }
 
+// https://go.dev/play/p/JxQFUm3Hsca
 // TODO 2.worker pool
 // TODO 3.использовать контекст отмены после двух 200 ок
