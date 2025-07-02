@@ -74,7 +74,58 @@ func main() {
 	//}
 
 	// TODO 2.worker pool
-	// https://go.dev/play/p/fR3EyrAFmLM
+	// https://go.dev/play/p/rbFgFYMKk6m
+	const workers = 3
+	n := len(urls)
+
+	//channel for tasks
+	tasks := make(chan string, n)
+	//channel for results
+	result := make(chan string, n)
+
+	wg := sync.WaitGroup{}
+
+	//run the workers
+	for i := 1; i < workers; i++ {
+		wg.Add(1)
+		go worker(tasks, result, &wg)
+	}
+
+	//run cicle by slice and recive the answer
+	for _, url := range urls {
+		tasks <- url
+	}
+	close(tasks)
+
+	go func() {
+		wg.Wait()
+		close(result)
+	}()
+
+	//read the answer
+	for ans := range result {
+		fmt.Println(ans)
+	}
+}
+
+// worker for requests
+func worker(tasks <-chan string, result chan<- string, wg *sync.WaitGroup) {
+	defer wg.Done()
+
+	for url := range tasks {
+		req, err := http.Get(url)
+		if err != nil {
+			result <- fmt.Sprintf("not ook")
+			continue
+		}
+
+		defer req.Body.Close()
+		if req.StatusCode == http.StatusOK {
+			result <- fmt.Sprintf("ok")
+		} else {
+			result <- fmt.Sprintf("not ok")
+		}
+	}
 }
 
 // TODO 3.использовать контекст отмены после двух 200 ок
