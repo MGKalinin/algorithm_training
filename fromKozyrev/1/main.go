@@ -74,7 +74,7 @@ func main() {
 	//}
 
 	// TODO 2.worker pool
-	// https://go.dev/play/p/Kjw_Vyea3CI
+	// https://go.dev/play/p/fR3EyrAFmLM
 }
 
 // TODO 3.использовать контекст отмены после двух 200 ок
