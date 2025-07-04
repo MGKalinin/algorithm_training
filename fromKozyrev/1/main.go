@@ -129,7 +129,7 @@ func main() {
 	//	}
 
 	// TODO 3.использовать semaphore и контекст отмены после двух 200 ок
-	// TODO to finalize code with context
+	// TODO to finalize code with context and semaphore
 	// https://go.dev/play/p/g420cG8vrVL
 
 	//context for initialisation cancel with contex
