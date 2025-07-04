@@ -7,7 +7,7 @@ import (
 	"sync"
 )
 
-// TODO писать код в песочнице
+// TO DO писать код в песочнице
 // Озон Платформа
 //
 // Дата: февраль 2025
@@ -37,7 +37,7 @@ func main() {
 		"https://ozone.ru",
 	}
 
-	// TODO 1.semaphore
+	// TO DO 1.semaphore
 	//channel for results of request
 	//result := make(chan string, len(urls))
 	//
@@ -74,7 +74,7 @@ func main() {
 	//	fmt.Println(val)
 	//}
 
-	// TODO 2.worker pool
+	// TO DO 2.worker pool
 	// https://go.dev/play/p/rbFgFYMKk6m
 	//	const workers = 3
 	//	n := len(urls)
