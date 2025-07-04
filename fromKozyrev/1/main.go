@@ -129,9 +129,8 @@ func main() {
 	//	}
 
 	// TODO 3.использовать semaphore и контекст отмены после двух 200 ок
-	// https://go.dev/play/p/rHveYc7jM0C
 	// TODO to finalize code with context
-	//
+	// https://go.dev/play/p/g420cG8vrVL
 
 	//context for initialisation cancel with contex
 	ctx, cancel := context.WithCancel(context.Background())
