@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"sync"
@@ -15,16 +16,16 @@ import (
 //
 // Задачи присланы участником сообщества. Как прислать свою задачу читайте тут.
 //
-// 1️⃣ Скрининг
-// 👉 Дано x, определить, является ли x степенью двойки.
-// 💡 Решение: x & (x - 1) == 0 – если выполняется, значит x степень двойки.
-// 2️⃣ Техническое собеседование
-// 📌 Задача 1:
+// 1 Скрининг
+// Дано x, определить, является ли x степенью двойки.
+// Решение: x & (x - 1) == 0 – если выполняется, значит x степень двойки.
+// 2 Техническое собеседование
+// Задача 1:
 // Дан список URL, нужно синхронно пройтись по нему и:
-// ✅ Вывести "ОК", если статус-код 200.
-// ❌ Вывести "не ОК", если статус-код  не 200 или произошла ошибка.
+// Вывести "ОК", если статус-код 200.
+// Вывести "не ОК", если статус-код  не 200 или произошла ошибка.
 //
-// 📌 Задача 2:
+// Задача 2:
 // Та же проверка, но теперь асинхронно/в параллель, при этом ничего не должно потеряться.
 func main() {
 	urls := []string{
@@ -36,7 +37,7 @@ func main() {
 		"https://ozone.ru",
 	}
 
-	// TO DO 1.semaphore
+	// TODO 1.semaphore
 	//channel for results of request
 	//result := make(chan string, len(urls))
 	//
@@ -129,6 +130,74 @@ func main() {
 
 	// TODO 3.использовать semaphore и контекст отмены после двух 200 ок
 	// https://go.dev/play/p/rHveYc7jM0C
-	// TODO add context
+	// TODO to finalize code with context
+	//
 
+	//context for initialisation cancel with contex
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	// var for count of StatuOK
+	countOk := 0
+	//add mutex for atomit operation with var of count
+	var mu sync.Mutex
+
+	// channel for semaphore len 3
+	semaphore := make(chan struct{}, 3)
+	//channel for result
+	result := make(chan string, len(urls))
+
+	//wg WaitGroup
+	wg := sync.WaitGroup{}
+	//run by slice
+	wg.Add(len(urls))
+	for _, url := range urls {
+		go func(c string) {
+			defer wg.Done()
+			semaphore <- struct{}{}
+			defer func() { <-semaphore }()
+
+			//check context situation
+			select {
+			case <-ctx.Done():
+				fmt.Println("cancel situation")
+				return
+			default:
+			}
+
+			//make requests process
+			request, err := http.NewRequestWithContext(ctx, "GET", c, nil)
+			if err != nil {
+				result <- fmt.Sprintf("not ook dont`t make request")
+				return
+			}
+			req, err := http.DefaultClient.Do(request)
+			if err != nil {
+				result <- fmt.Sprintf("not oook mistake answer")
+				return
+			}
+			defer req.Body.Close()
+			//check the answer & incrementation of var of count
+			if req.StatusCode == http.StatusOK {
+				result <- fmt.Sprintf("ok")
+				mu.Lock()
+				countOk++
+				if countOk >= 2 {
+					cancel()
+				}
+				mu.Unlock()
+			} else {
+				result <- fmt.Sprintf("not ok")
+			}
+
+		}(url)
+	}
+	// close wg & result
+	go func() {
+		wg.Wait()
+		close(result)
+	}()
+	//read results from result
+	for ans := range result {
+		fmt.Println(ans)
+	}
 }
