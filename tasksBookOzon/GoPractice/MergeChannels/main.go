@@ -7,3 +7,5 @@ package main
 func merge(cs ...<-chan int) <-chan int {
 
 }
+
+// https://go.dev/play/p/16gslQ_Ib7o
