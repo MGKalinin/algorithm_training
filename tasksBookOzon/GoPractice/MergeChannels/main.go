@@ -8,4 +8,4 @@ func merge(cs ...<-chan int) <-chan int {
 
 }
 
-// https://go.dev/play/p/16gslQ_Ib7o
+// https://go.dev/play/p/csG5tIbSFTb
