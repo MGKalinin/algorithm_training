@@ -13,7 +13,7 @@ medium
 какая алгоритмическая сложность у задачи?
 */
 func merge(a, b []int) []int {
-	result := make([]int, 0) //TODO cap(len(a)+len(b))?
+	result := make([]int, 0, len(a)+len(b))
 	f, s := 0, 0
 	for f < len(a) && s < len(b) {
 		switch {
@@ -47,12 +47,10 @@ func merge(a, b []int) []int {
 	}
 
 	for s < len(b) {
-		{
-			if len(result) == 0 || b[s] != result[(len(result)-1)] {
-				result = append(result, b[s])
-			}
-			s++
+		if len(result) == 0 || b[s] != result[(len(result)-1)] {
+			result = append(result, b[s])
 		}
+		s++
 	}
 	return result
 }
