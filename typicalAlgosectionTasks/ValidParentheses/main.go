@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 /* leetcode https://leetcode.com/problems/valid-parentheses/description/
 20. Valid Parentheses
 Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
@@ -28,7 +30,37 @@ Input: s = "([])"
 Output: true */
 
 func isValid(s string) bool {
+	stack := []rune{}
+	char := map[rune]rune{
+		')': '(',
+		'}': '{',
+		']': '[',
+	}
+	for _, ch := range s {
+		if ch == '[' || ch == '{' || ch == '(' {
+			stack = append(stack, ch)
+		} else {
+			if len(stack) == 0 || stack[len(stack)-1] != char[ch] {
+				return false
+			}
+			stack = stack[:len(stack)-1]
+		}
+	}
 
+	return len(stack) == 0
 }
 
-// https://go.dev/play/p/EASmVM0Hqid
+func main() {
+	tests := []string{
+		"([])",
+		"()",
+		"()[]{}",
+		"(]",
+		"([)]",
+		"]",
+	}
+
+	for _, test := range tests {
+		fmt.Printf("%s: %v\n", test, isValid(test))
+	}
+}
