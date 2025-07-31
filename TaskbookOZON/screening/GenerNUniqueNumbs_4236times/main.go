@@ -16,5 +16,4 @@ func uniqRandn(n int) []int {
 	//...
 }
 
-// https://go.dev/play/p/SQCZ6bTxIMd
-wegaqrweghaer
+// https://go.dev/play/p/2gBSm6LcjZ4
