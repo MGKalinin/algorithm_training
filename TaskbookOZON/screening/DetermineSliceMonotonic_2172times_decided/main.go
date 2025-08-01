@@ -13,7 +13,17 @@ import "fmt"
 // {23,5,23} - false
 func monotonic(in []int) bool {
 	isIncreasing, isDecreasing := true, true
-
+	for i := 0; i < len(in)-1; i++ {
+		if in[i] < in[i+1] {
+			isDecreasing = false
+		}
+		if in[i] > in[i+1] {
+			isIncreasing = false
+		}
+		if !isIncreasing && !isDecreasing {
+			return false
+		}
+	}
 	return isIncreasing || isDecreasing
 
 }
