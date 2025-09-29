@@ -2,45 +2,67 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"os"
+	"sort"
+	"strconv"
+	"strings"
 )
 
-// Граф из списка маршрутов
+// 61. Пересечение множеств
 func main() {
-
 	var in *bufio.Reader
 	var out *bufio.Writer
 	in = bufio.NewReader(os.Stdin)
 	out = bufio.NewWriter(os.Stdout)
 	defer out.Flush()
+	// первый слайс
+	line1, _ := in.ReadString('\n')
+	line1 = strings.TrimSpace(line1)
+	numbers1 := strings.Fields(line1)
+	var slice1 []int
+	for _, numStr := range numbers1 {
+		nums, _ := strconv.Atoi(numStr)
+		slice1 = append(slice1, nums)
+	}
+	// второй слайс
+	line2, _ := in.ReadString('\n')
+	line2 = strings.TrimSpace(line2)
+	numbers2 := strings.Fields(line2)
+	var slice2 []int
+	for _, numStr := range numbers2 {
+		nums, _ := strconv.Atoi(numStr)
+		slice2 = append(slice2, nums)
+	}
+	sort.Ints(slice1)
+	sort.Ints(slice2)
+	//fmt.Println(slice1, slice2)
 
-	var n, m int // n stop, m route
-	fmt.Fscan(in, &n, &m)
+	first, second := 0, 0
+	n := max(len(slice1), len(slice2))
+	result := make([]int, 0, n)
 
-	fmt.Println(n, m)
-
-	//anya := make([]int, n)
-	//boris := make([]int, m)
-	//
-	//for i := range n {
-	//	fmt.Fscan(in, &anya[i])
-	//}
-	//
-	//for i := range m {
-	//	fmt.Fscan(in, &boris[i])
-	//}
-	//fmt.Fprintln(out, len(notUniq))
-	//for _, v := range notUniq {
-	//	fmt.Fprint(out, v, " ")
-	//}
-	//fmt.Fprint(out, "\n")
-	//
-	//fmt.Fprintln(out, len(uniqAnya))
-	//for _, v := range uniqAnya {
-	//	fmt.Fprint(out, v, " ")
-	//}
-	//fmt.Fprint(out, "\n")
-	//
-
+	for first < len(slice1) && second < len(slice2) {
+		if slice1[first] == slice2[second] {
+			result = append(result, slice1[first])
+			first++
+			second++
+		} else if slice1[first] < slice2[second] {
+			first++
+		} else {
+			second++
+		}
+	}
+	//fmt.Println(result)
+	// Вывод результата согласно формату задачи
+	if len(result) > 0 {
+		for i, val := range result {
+			if i > 0 {
+				out.WriteString(" ")
+			}
+			out.WriteString(strconv.Itoa(val))
+		}
+		out.WriteString("\n")
+	} else {
+		out.WriteString("\n") // если пересечение пустое
+	}
 }
