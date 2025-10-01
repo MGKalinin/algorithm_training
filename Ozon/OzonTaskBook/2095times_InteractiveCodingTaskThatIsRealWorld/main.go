@@ -44,7 +44,7 @@ func main() {
 	   показывает практика это самая сложная часть задачи)
 	*/
 
-	/* //TODO вынести запрос в функцию за main
+	/* //TO DO вынести запрос в функцию за main
 	   1. Поочередно выполнит http запросы по предложенному списку ссылок
 	   •в случае получения http-кода ответа на запрос "200 OK" печатаем на экране "адрес url -
 	   ok"
@@ -52,18 +52,29 @@ func main() {
 	   ошибки печатаем на экране "адрес url - not ok" */
 
 	for _, url := range urls {
-		resp, err := http.Get(url)
-		if err != nil {
-			fmt.Printf("адрес: %s - not ok (ошибка :%v)\n", url, err)
-			continue // переходим к следующему URL
-		}
-		// Закрываем тело ответа сразу после проверки
-		defer resp.Body.Close()
-
-		if resp.StatusCode == http.StatusOK {
-			fmt.Printf("адрес: %s - ok\n", url)
-		} else {
-			fmt.Printf("адрес: %s - not ok\n", url)
-		}
+		GetAnswer(url)
 	}
 }
+
+// GetAnswer функция возвращает результат запроса по адресу
+func GetAnswer(url string) {
+	resp, err := http.Get(url)
+	if err != nil {
+		fmt.Printf("адрес: %s - not ok (ошибка: %v)\n", url, err) // обработка например не существующий адрес
+		return                                                    // продолжаем по перечню url
+	}
+	defer resp.Body.Close() // закрываем тело запроса
+
+	if resp.StatusCode == http.StatusOK {
+		fmt.Printf("адрес: %s - ok\n", url)
+	} else {
+		fmt.Printf("адрес: %s - not ok\n", url)
+	}
+}
+
+/* // TODO:
+2. Модифицируйте программу таким образом, чтобы использовались каналы для
+	   коммуникации основного потока с горутинами. Пример:
+	   •Запросы по списку выполняются в горутинах.
+	   •Печать результатов на экран происходит в основном потоке
+*/
