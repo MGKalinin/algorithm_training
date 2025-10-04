@@ -118,6 +118,65 @@ func main() {
 		слайса урлов. Считайте, что урлы приходят из внешнего источника. Сколько их будет
 		заранее - неизвестно. Предложите идиоматичный вариант, как ваша программа будет
 		узнавать об окончании списка и передавать сигнал об окончании действий далее.
-	*/ //TODO: и ещё добавить worker pool
+	*/ //TO DO: и ещё добавить worker pool
+
+	// Считайте, что урлы приходят из внешнего источника. - этот пункт имитируем путём чтения из канала-
+	//якобы в который приходят url
+	//inputUrls := make(chan string)
+	//resultUrl := make(chan string) //канал чтения результатов запроса
+	//var wg sync.WaitGroup
+	//
+	////запуск записи в канал url
+	//go func() {
+	//	for _, url := range urls { // в реальности это чтение из внешнего источника- API, файл
+	//		inputUrls <- url
+	//	}
+	//	close(inputUrls) // закрываем по окончании данных
+	//}()
+	//
+	//// запустить worker в заданном количестве
+	//count := 5 // количество worker
+	//for i := 0; i < count; i++ {
+	//	wg.Add(1)
+	//	go worker(inputUrls, resultUrl, &wg)
+	//}
+	//
+	//// ждём горутины, закрываем канал
+	//go func() {
+	//	wg.Wait()
+	//	close(resultUrl)
+	//}()
+	//
+	//// напечатать результат
+	//for res := range resultUrl {
+	//	fmt.Println(res)
+	//}
+	//}
+
+	//// worker функция обработаки url
+	//func worker(inputUrls <-chan string, resultUrl chan<- string, wg *sync.WaitGroup) {
+	//	defer wg.Done()
+	//
+	//	for url := range inputUrls {
+	//		resp, err := http.Get(url)
+	//		if err != nil {
+	//			resultUrl <- fmt.Sprintf("адрес: %s - not ok (ошибка: %v)", url, err)
+	//			continue // продолжаем запросы
+	//		}
+	//
+	//		if resp.StatusCode == http.StatusOK {
+	//			resultUrl <- fmt.Sprintf("адрес: %s - ok", url)
+	//		} else {
+	//			resultUrl <- fmt.Sprintf("адрес: %s - not ok", url)
+	//		}
+	//		resp.Body.Close()
+	//	}
+	//}
+
+	/*4. (необязательно, можно обсудить устно, чтобы убедиться, что кандидат понимает идею
+	  контекста, либо предложить как домашнее задание) Модифицируйте программу таким
+	  образом, что бы при получении 2 первых ответов с "200 OK" остальные запросы штатно
+	  прерывались.
+	  При этом необходимо напечатать на экране сообщение о завершении запроса.*/
 
 }
